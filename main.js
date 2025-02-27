@@ -73,12 +73,63 @@
 // console.log(user.email); // undefined
 // console.log(user.status); // null
 
-// Array(배열), item(요소)
+// // Array(배열), item(요소)
 
-const fruits = new Array("Apple", "Banana", "Cherry"); // 생성자 함수, 자바스크립트 클래스
-const fruits2 = ["Apple", "Banana", "Cherry"]; // 리터럴 방식, 대괄호 표기법
+// const fruits = new Array("Apple", "Banana", "Cherry"); // 생성자 함수, 자바스크립트 클래스
+// const fruits2 = ["Apple", "Banana", "Cherry"]; // 리터럴 방식, 대괄호 표기법
 
-console.log(fruits);
-console.log(fruits[1]); // zero-based numbering
-console.log(fruits.length);
-console.log(fruits[fruits.length - 1]);
+// console.log(fruits);
+// console.log(fruits[1]); // zero-based numbering
+// console.log(fruits.length);
+// console.log(fruits[fruits.length - 1]);
+
+// Object(객체)
+const user = new Object(); // 생성자 함수 방식
+user.name = "Hyunsoo";
+user.age = 25;
+
+console.log(user); // key(속성, 프로퍼티)-value(값) 형태로 표현
+
+function User() {
+  this.name = "Hyunsoo";
+  this.age = 25;
+}
+
+const user2 = User();
+console.log(user2);
+
+const user3 = {
+  // 리터럴 방식
+  name: "Hyunsoo",
+  age: 25,
+};
+
+console.log(user3);
+console.log(user3.name); //
+//  전표기법
+console.log(user3["name"]); // 대괄호 표기법
+
+const key = "age";
+console.log(user3[key]);
+
+// 속성에 순서 ❌
+// 중복된 순서 ❌
+
+const userA = {
+  name: "A",
+  age: 85,
+};
+
+const userB = {
+  name: "B",
+  age: 45,
+  parent: userA,
+};
+
+console.log(userB.parent.name);
+console.log(userB["parent"][age]);
+
+const users = [userA, userB];
+
+console.log(users);
+console.log(users[0].name);
