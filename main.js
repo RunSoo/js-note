@@ -30,45 +30,55 @@
 // console.log(typeof (numA + numB).toFixed()); // string
 // console.log(typeof Number((numA + numB).toFixed())); // number
 
-// Boolean(불린)
-const boolA = true;
-const boolB = false;
+// // Boolean(불린)
+// const boolA = true;
+// const boolB = false;
 
-if (boolA) {
-  console.log("Hello");
-}
+// if (boolA) {
+//   console.log("Hello");
+// }
 
-if (boolB) {
-  console.log("Hello");
-}
+// if (boolB) {
+//   console.log("Hello");
+// }
 
-// Null과 undefined
-let age = null; // 명시적으로 존재하지 않거나 비어있다고 나타냄
-console.log(age); // null
+// // Null과 undefined
+// let age = null; // 명시적으로 존재하지 않거나 비어있다고 나타냄
+// console.log(age); // null
 
-setTimeout(function () {
-  age = 85;
-  console.log(age);
-}, 1000);
+// setTimeout(function () {
+//   age = 85;
+//   console.log(age);
+// }, 1000);
 
-let age2 = undefined;
-// let age2; 도 동일 -> 암시적
-// null은 명시적, undefined는 암시적
+// let age2 = undefined;
+// // let age2; 도 동일 -> 암시적
+// // null은 명시적, undefined는 암시적
 
-console.log(age2);
+// console.log(age2);
 
-setTimeout(function () {
-  age2 = 85;
-  console.log(age2);
-}, 1000);
+// setTimeout(function () {
+//   age2 = 85;
+//   console.log(age2);
+// }, 1000);
 
-const user = {
-  name: "Hyunsoo",
-  age: 25,
-  status: null,
-};
+// const user = {
+//   name: "Hyunsoo",
+//   age: 25,
+//   status: null,
+// };
 
-console.log(user.name);
-console.log(user.age);
-console.log(user.email); // undefined
-console.log(user.status); // null
+// console.log(user.name);
+// console.log(user.age);
+// console.log(user.email); // undefined
+// console.log(user.status); // null
+
+// Array(배열), item(요소)
+
+const fruits = new Array("Apple", "Banana", "Cherry"); // 생성자 함수, 자바스크립트 클래스
+const fruits2 = ["Apple", "Banana", "Cherry"]; // 리터럴 방식, 대괄호 표기법
+
+console.log(fruits);
+console.log(fruits[1]); // zero-based numbering
+console.log(fruits.length);
+console.log(fruits[fruits.length - 1]);
