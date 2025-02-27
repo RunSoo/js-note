@@ -83,53 +83,98 @@
 // console.log(fruits.length);
 // console.log(fruits[fruits.length - 1]);
 
-// Object(객체)
-const user = new Object(); // 생성자 함수 방식
-user.name = "Hyunsoo";
-user.age = 25;
+// // Object(객체)
+// const user = new Object(); // 생성자 함수 방식
+// user.name = "Hyunsoo";
+// user.age = 25;
 
-console.log(user); // key(속성, 프로퍼티)-value(값) 형태로 표현
+// console.log(user); // key(속성, 프로퍼티)-value(값) 형태로 표현
 
-function User() {
-  this.name = "Hyunsoo";
-  this.age = 25;
+// function User() {
+//   this.name = "Hyunsoo";
+//   this.age = 25;
+// }
+
+// const user2 = User();
+// console.log(user2);
+
+// const user3 = {
+//   // 리터럴 방식
+//   name: "Hyunsoo",
+//   age: 25,
+// };
+
+// console.log(user3);
+// console.log(user3.name); //
+// //  전표기법
+// console.log(user3["name"]); // 대괄호 표기법
+
+// const key = "age";
+// console.log(user3[key]);
+
+// // 속성에 순서 ❌
+// // 중복된 순서 ❌
+
+// const userA = {
+//   name: "A",
+//   age: 85,
+// };
+
+// const userB = {
+//   name: "B",
+//   age: 45,
+//   parent: userA,
+// };
+
+// console.log(userB.parent.name);
+// console.log(userB["parent"][age]);
+
+// const users = [userA, userB];
+
+// console.log(users);
+// console.log(users[0].name);
+
+// Function
+function hello() {
+  console.log("Hello");
 }
 
-const user2 = User();
-console.log(user2);
+hello(); // call
+console.log(hello); // js에서 함수는 데이터 취급
+// ƒ hello() {
+//   console.log("Hello");
+// }
 
-const user3 = {
-  // 리터럴 방식
-  name: "Hyunsoo",
-  age: 25,
+function getNumber() {
+  return 123;
+}
+
+console.log(getNumber);
+// ƒ getNumber() {
+//   return 123;
+// }
+console.log(typeof getNumber); // function
+console.log(getNumber()); // 123
+console.log(typeof getNumber()); // number
+
+const getNumber2 = function () {
+  return 123;
 };
 
-console.log(user3);
-console.log(user3.name); //
-//  전표기법
-console.log(user3["name"]); // 대괄호 표기법
+console.log(typeof getNumber2); // function
+console.log(typeof getNumber2()); // number
 
-const key = "age";
-console.log(user3[key]);
-
-// 속성에 순서 ❌
-// 중복된 순서 ❌
-
-const userA = {
-  name: "A",
-  age: 85,
+const funcA = function () {
+  console.log("A");
 };
 
-const userB = {
-  name: "B",
-  age: 45,
-  parent: userA,
+const funcB = function (c) {
+  console.log(c);
+  c();
 };
 
-console.log(userB.parent.name);
-console.log(userB["parent"][age]);
-
-const users = [userA, userB];
-
-console.log(users);
-console.log(users[0].name);
+funcB(funcA);
+// ƒ () {
+//   console.log("A");
+// }
+// main.js:168 A
