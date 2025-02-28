@@ -179,19 +179,52 @@
 // // }
 // // main.js:168 A
 
-// 형 변환(Type Conversion)
+// // 형 변환(Type Conversion)
 
-const a = 1;
-const b = "1";
+// const a = 1;
+// const b = "1";
 
-console.log(a == b); // true
-console.log(a === b); // false
+// console.log(a == b); // true
+// console.log(a === b); // false
 
-// === 일치 연산자
-// == 동등 연산자
+// // === 일치 연산자
+// // == 동등 연산자
 
-const c = true;
-const d = 1;
+// const c = true;
+// const d = 1;
 
-console.log(c == d); // true
-console.log(c === d); // false
+// console.log(c == d); // true
+// console.log(c === d); // false
+
+// 참과 거짓 (Truthy & Falsy)
+
+if (true) {
+  console.log("참!");
+}
+
+if (123) {
+  console.log("참!");
+}
+
+if (0) {
+  console.log("참!"); // 출력 ❌
+}
+
+if ("0") {
+  console.log("참!");
+}
+
+// ✅ 거짓인 값들
+// 1) false
+// 2) 0
+// 3) null
+// 4) undfined
+// 5) NaN
+// 6) ''
+// 7) 0n
+
+const fruits = ["Apple", "Banana"];
+
+if (fruits.length) {
+  console.log("아이템이 들어있음!");
+}
