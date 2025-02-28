@@ -196,35 +196,80 @@
 // console.log(c == d); // true
 // console.log(c === d); // false
 
-// 참과 거짓 (Truthy & Falsy)
+// // 참과 거짓 (Truthy & Falsy)
 
-if (true) {
-  console.log("참!");
+// if (true) {
+//   console.log("참!");
+// }
+
+// if (123) {
+//   console.log("참!");
+// }
+
+// if (0) {
+//   console.log("참!"); // 출력 ❌
+// }
+
+// if ("0") {
+//   console.log("참!");
+// }
+
+// // ✅ 거짓인 값들
+// // 1) false
+// // 2) 0
+// // 3) null
+// // 4) undfined
+// // 5) NaN
+// // 6) ''
+// // 7) 0n
+
+// const fruits = ["Apple", "Banana"];
+
+// if (fruits.length) {
+//   console.log("아이템이 들어있음!");
+// }
+
+// 데이터 타입 확인
+
+console.log(typeof "Hello" === "string");
+console.log(typeof 123 === "number");
+console.log(typeof false === "boolean");
+console.log(typeof undefined === "undefined");
+console.log(typeof null === "object");
+console.log(typeof null === "null"); // false
+console.log(typeof [] === "object");
+console.log(typeof {} === "object");
+console.log(typeof function () {} === "function");
+
+// console.log(null.constructor);
+// main.js:244 Uncaught TypeError: Cannot read properties of null (reading 'constructor')
+//     at Object.adjPd (main.js:244:18)
+//     at newRequire (index.63aff760.js:71:24)
+//     at index.63aff760.js:122:5
+//     at index.63aff760.js:145:3
+console.log([].constructor === Array);
+console.log({}.constructor === Object);
+
+console.log(Object.prototype.toString.call(null)); //[object Null]
+console.log(Object.prototype.toString.call(null).slice(8, -1) === "Null");
+
+function checkType(data) {
+  return Object.prototype.toString.call(data).slice(8, -1);
 }
 
-if (123) {
-  console.log("참!");
-}
-
-if (0) {
-  console.log("참!"); // 출력 ❌
-}
-
-if ("0") {
-  console.log("참!");
-}
-
-// ✅ 거짓인 값들
-// 1) false
-// 2) 0
-// 3) null
-// 4) undfined
-// 5) NaN
-// 6) ''
-// 7) 0n
-
-const fruits = ["Apple", "Banana"];
-
-if (fruits.length) {
-  console.log("아이템이 들어있음!");
-}
+console.log(checkType("Hello"));
+console.log(checkType(123));
+console.log(checkType(false));
+console.log(checkType(undefined));
+console.log(checkType(null));
+console.log(checkType([]));
+console.log(checkType({}));
+console.log(checkType(function () {}));
+// main.js:260 String;
+// main.js:261 Number
+// main.js:262 Boolean
+// main.js:263 Undefined
+// main.js:264 Null
+// main.js:265 Array
+// main.js:266 Object
+// main.js:267 Function
