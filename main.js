@@ -229,47 +229,95 @@
 //   console.log("아이템이 들어있음!");
 // }
 
-// 데이터 타입 확인
+// // 데이터 타입 확인
 
-console.log(typeof "Hello" === "string");
-console.log(typeof 123 === "number");
-console.log(typeof false === "boolean");
-console.log(typeof undefined === "undefined");
-console.log(typeof null === "object");
-console.log(typeof null === "null"); // false
-console.log(typeof [] === "object");
-console.log(typeof {} === "object");
-console.log(typeof function () {} === "function");
+// console.log(typeof "Hello" === "string");
+// console.log(typeof 123 === "number");
+// console.log(typeof false === "boolean");
+// console.log(typeof undefined === "undefined");
+// console.log(typeof null === "object");
+// console.log(typeof null === "null"); // false
+// console.log(typeof [] === "object");
+// console.log(typeof {} === "object");
+// console.log(typeof function () {} === "function");
 
-// console.log(null.constructor);
-// main.js:244 Uncaught TypeError: Cannot read properties of null (reading 'constructor')
-//     at Object.adjPd (main.js:244:18)
+// // console.log(null.constructor);
+// // main.js:244 Uncaught TypeError: Cannot read properties of null (reading 'constructor')
+// //     at Object.adjPd (main.js:244:18)
+// //     at newRequire (index.63aff760.js:71:24)
+// //     at index.63aff760.js:122:5
+// //     at index.63aff760.js:145:3
+// console.log([].constructor === Array);
+// console.log({}.constructor === Object);
+
+// console.log(Object.prototype.toString.call(null)); //[object Null]
+// console.log(Object.prototype.toString.call(null).slice(8, -1) === "Null");
+
+// function checkType(data) {
+//   return Object.prototype.toString.call(data).slice(8, -1);
+// }
+
+// console.log(checkType("Hello"));
+// console.log(checkType(123));
+// console.log(checkType(false));
+// console.log(checkType(undefined));
+// console.log(checkType(null));
+// console.log(checkType([]));
+// console.log(checkType({}));
+// console.log(checkType(function () {}));
+// // main.js:260 String;
+// // main.js:261 Number
+// // main.js:262 Boolean
+// // main.js:263 Undefined
+// // main.js:264 Null
+// // main.js:265 Array
+// // main.js:266 Object
+// // main.js:267 Function
+
+// 산술 (Arithmetic)
+
+console.log(1 + 2);
+console.log(5 - 7);
+console.log(3 * 4);
+console.log(10 / 2);
+console.log(7 % 5);
+
+function isEven(num) {
+  return num % 2 === 0;
+}
+
+console.log(isEven(3));
+console.log(isEven(12));
+
+// 할당 (Assignment)
+
+const a = 3;
+
+// a = a + 2; // 재할당 불가
+// main.js:296 Uncaught TypeError: Assignment to constant variable.
+//     at Object.adjPd (main.js:296:1)
 //     at newRequire (index.63aff760.js:71:24)
 //     at index.63aff760.js:122:5
 //     at index.63aff760.js:145:3
-console.log([].constructor === Array);
-console.log({}.constructor === Object);
+//
 
-console.log(Object.prototype.toString.call(null)); //[object Null]
-console.log(Object.prototype.toString.call(null).slice(8, -1) === "Null");
+let b = 3;
+b += 2;
+b -= 1;
+b *= 3;
+b /= 2;
+b %= 5;
 
-function checkType(data) {
-  return Object.prototype.toString.call(data).slice(8, -1);
-}
+console.log(a);
+console.log(b);
 
-console.log(checkType("Hello"));
-console.log(checkType(123));
-console.log(checkType(false));
-console.log(checkType(undefined));
-console.log(checkType(null));
-console.log(checkType([]));
-console.log(checkType({}));
-console.log(checkType(function () {}));
-// main.js:260 String;
-// main.js:261 Number
-// main.js:262 Boolean
-// main.js:263 Undefined
-// main.js:264 Null
-// main.js:265 Array
-// main.js:266 Object
-// main.js:267 Function
+// 증감(Increment & Decrement)
+
+let m = 3;
+
+console.log(m++);
+console.log(++m);
+console.log(m);
+console.log(m--);
+console.log(--m);
+console.log(m);
