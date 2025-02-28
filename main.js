@@ -134,47 +134,64 @@
 // console.log(users);
 // console.log(users[0].name);
 
-// Function
-function hello() {
-  console.log("Hello");
-}
-
-hello(); // call
-console.log(hello); // js에서 함수는 데이터 취급
-// ƒ hello() {
+// // Function
+// function hello() {
 //   console.log("Hello");
 // }
 
-function getNumber() {
-  return 123;
-}
+// hello(); // call
+// console.log(hello); // js에서 함수는 데이터 취급
+// // ƒ hello() {
+// //   console.log("Hello");
+// // }
 
-console.log(getNumber);
-// ƒ getNumber() {
+// function getNumber() {
 //   return 123;
 // }
-console.log(typeof getNumber); // function
-console.log(getNumber()); // 123
-console.log(typeof getNumber()); // number
 
-const getNumber2 = function () {
-  return 123;
-};
+// console.log(getNumber);
+// // ƒ getNumber() {
+// //   return 123;
+// // }
+// console.log(typeof getNumber); // function
+// console.log(getNumber()); // 123
+// console.log(typeof getNumber()); // number
 
-console.log(typeof getNumber2); // function
-console.log(typeof getNumber2()); // number
+// const getNumber2 = function () {
+//   return 123;
+// };
 
-const funcA = function () {
-  console.log("A");
-};
+// console.log(typeof getNumber2); // function
+// console.log(typeof getNumber2()); // number
 
-const funcB = function (c) {
-  console.log(c);
-  c();
-};
-
-funcB(funcA);
-// ƒ () {
+// const funcA = function () {
 //   console.log("A");
-// }
-// main.js:168 A
+// };
+
+// const funcB = function (c) {
+//   console.log(c);
+//   c();
+// };
+
+// funcB(funcA);
+// // ƒ () {
+// //   console.log("A");
+// // }
+// // main.js:168 A
+
+// 형 변환(Type Conversion)
+
+const a = 1;
+const b = "1";
+
+console.log(a == b); // true
+console.log(a === b); // false
+
+// === 일치 연산자
+// == 동등 연산자
+
+const c = true;
+const d = 1;
+
+console.log(c == d); // true
+console.log(c === d); // false
