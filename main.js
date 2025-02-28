@@ -274,50 +274,89 @@
 // // main.js:266 Object
 // // main.js:267 Function
 
-// 산술 (Arithmetic)
+// // 산술 (Arithmetic)
 
-console.log(1 + 2);
-console.log(5 - 7);
-console.log(3 * 4);
-console.log(10 / 2);
-console.log(7 % 5);
+// console.log(1 + 2);
+// console.log(5 - 7);
+// console.log(3 * 4);
+// console.log(10 / 2);
+// console.log(7 % 5);
 
-function isEven(num) {
-  return num % 2 === 0;
-}
+// function isEven(num) {
+//   return num % 2 === 0;
+// }
 
-console.log(isEven(3));
-console.log(isEven(12));
+// console.log(isEven(3));
+// console.log(isEven(12));
 
-// 할당 (Assignment)
+// // 할당 (Assignment)
 
-const a = 3;
+// const a = 3;
 
-// a = a + 2; // 재할당 불가
-// main.js:296 Uncaught TypeError: Assignment to constant variable.
-//     at Object.adjPd (main.js:296:1)
-//     at newRequire (index.63aff760.js:71:24)
-//     at index.63aff760.js:122:5
-//     at index.63aff760.js:145:3
-//
+// // a = a + 2; // 재할당 불가
+// // main.js:296 Uncaught TypeError: Assignment to constant variable.
+// //     at Object.adjPd (main.js:296:1)
+// //     at newRequire (index.63aff760.js:71:24)
+// //     at index.63aff760.js:122:5
+// //     at index.63aff760.js:145:3
+// //
 
-let b = 3;
-b += 2;
-b -= 1;
-b *= 3;
-b /= 2;
-b %= 5;
+// let b = 3;
+// b += 2;
+// b -= 1;
+// b *= 3;
+// b /= 2;
+// b %= 5;
 
-console.log(a);
-console.log(b);
+// console.log(a);
+// console.log(b);
 
-// 증감(Increment & Decrement)
+// // 증감(Increment & Decrement)
 
-let m = 3;
+// let m = 3;
 
-console.log(m++);
-console.log(++m);
-console.log(m);
-console.log(m--);
-console.log(--m);
-console.log(m);
+// console.log(m++);
+// console.log(++m);
+// console.log(m);
+// console.log(m--);
+// console.log(--m);
+// console.log(m);
+
+// 부정(Negation)
+
+console.log(!true);
+console.log(!false);
+
+console.log(!0); // true
+console.log(!!0); // false
+console.log(!!!0); // true
+console.log(!null); // true
+console.log(!undefined); // true
+console.log(!NaN); // true
+console.log(!""); // true
+
+console.log(!{}); // false
+console.log(![]); // false
+
+// 비교(Comparison)
+
+const a = 1;
+const b = 3;
+
+// 동등(형 변환!)
+console.log(a == b); // false
+
+// 부등(형 변환!)
+console.log(a != b); // true
+
+// 일치
+console.log(a === b); // false
+
+// 불일치
+console.log(a !== b); // true
+
+// 큼
+console.log(a > b); // false
+
+// 크거나 같음
+console.log(a >= b); // false
