@@ -472,41 +472,72 @@
 // const arrA = [1, 2, 3];
 // fn(...arrA); // 1 2 3
 
-// ✅ 구조 분해 할당 (Destructuring assignment)
-const arr = [1, 2, 3];
-// const a = arr[0];
-// const b = arr[1];
-// const c = arr[2];
-const [a, b, c] = arr;
+// // ✅ 구조 분해 할당 (Destructuring assignment)
+// const arr = [1, 2, 3];
+// // const a = arr[0];
+// // const b = arr[1];
+// // const c = arr[2];
+// const [a, b, c] = arr;
 
-let e = 0;
-let f = 0;
-[, e, f] = arr;
+// let e = 0;
+// let f = 0;
+// [, e, f] = arr;
 
-console.log(a, b, c); // 1 2 3
-console.log(e, f); // 2 3
+// console.log(a, b, c); // 1 2 3
+// console.log(e, f); // 2 3
 
-const [g, ...rest] = arr;
-console.log(g, rest); // 1 (2) [2, 3]
+// const [g, ...rest] = arr;
+// console.log(g, rest); // 1 (2) [2, 3]
 
-const obj = {
-  a1: 1,
-  b1: 2,
-  c1: 3,
+// const obj = {
+//   a1: 1,
+//   b1: 2,
+//   c1: 3,
+// };
+
+// const { a1, b1 } = obj; // 속성 이름으로 해당하는 것 찾을 수 있음
+// const { c1 } = obj;
+// const { d1 } = obj;
+// const { e1: four = 4 } = obj;
+// const { a1: hyunsoo } = obj;
+
+// console.log(a1, b1); // 1 2
+// console.log(c1); // 3
+// console.log(d1); // undefined
+// // console.log(e1); // main.js:507 Uncaught ReferenceError: e1 is not defined
+// console.log(four); // 4
+// console.log(hyunsoo); // 1
+
+// const { f1, ...rest1 } = obj;
+// console.log(f1, rest1); // undefined {a1: 1, b1: 2, c1: 3}
+
+// ✅ 선택적 체이닝(Optional Chaining)
+
+const user = {};
+
+console.log(user.name); // undefined
+
+const user1 = null;
+// console.log(user1.name); //main.js:521 Uncaught TypeError: Cannot read properties of null (reading 'name')
+console.log(user1?.name); // undefined
+
+const userA = {
+  name: "Jane",
+  age: 85,
+  address: {
+    country: "Korea",
+    city: "Seoul",
+  },
 };
 
-const { a1, b1 } = obj; // 속성 이름으로 해당하는 것 찾을 수 있음
-const { c1 } = obj;
-const { d1 } = obj;
-const { e1: four = 4 } = obj;
-const { a1: hyunsoo } = obj;
+const userB = {
+  name: "Ruby",
+  age: 22,
+};
 
-console.log(a1, b1); // 1 2
-console.log(c1); // 3
-console.log(d1); // undefined
-// console.log(e1); // main.js:507 Uncaught ReferenceError: e1 is not defined
-console.log(four); // 4
-console.log(hyunsoo); // 1
+function getCity(user) {
+  return user?.address?.city || "주소 없음";
+}
 
-const { f1, ...rest1 } = obj;
-console.log(f1, rest1); // undefined {a1: 1, b1: 2, c1: 3}
+console.log(getCity(userA)); // Seoul
+console.log(getCity(userB)); // 주소 없음
