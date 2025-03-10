@@ -361,34 +361,74 @@
 // // 크거나 같음
 // console.log(a >= b); // false
 
-// 논리(Logical)
+// // 논리(Logical)
 
-const a = true;
-const b = true;
+// const a = true;
+// const b = true;
 
-// AND(그리고) 연산자
-if (a && b) {
-  console.log("모두가 참");
+// // AND(그리고) 연산자
+// if (a && b) {
+//   console.log("모두가 참");
+// }
+
+// // OR(또는) 연산자
+// if (a || b) {
+//   console.log("하나 이상이 참!");
+// }
+
+// // && 연산자는 왼쪽에서부터 거짓을 찾음
+// console.log(true && false);
+// console.log(1 && 0); // 0: 피연산자가 반환될 수 있음
+// console.log(1 && 2 && 0); // 0
+// console.log(1 && 0 && 2); // 0
+// console.log(1 && 2 && 3); // 3
+// console.log("A" && "B" && ""); //
+// console.log("A" && "B" && "C"); // C
+
+// // || 연산자는 왼쪽에서부터 참을 찾음
+// console.log(false || true); // true
+// console.log(0 || 1); // 1
+// console.log(false || 0 || {}); // {}
+// console.log(false || [] || null);
+// console.log(function () {} || undefined || "");
+// console.log(false || 0 || NaN);
+
+// Nullish 병합(Nullish Coalescing)
+
+const n = 0;
+
+// OR 연산자를 사용한 경우
+const num1 = n || 7; // 왼쪽부터 거짓이 아닌 데이터를 찾음
+console.log(num1); // 7
+
+// Nullish 병합 연산자를 사용한 경우
+const num2 = n ?? 7; // 왼쪽부터 null이나 undefined가 아닌 데이터를 찾음 (범위 축소)
+console.log(num2); // 0
+
+console.log(null ?? 1); // 1
+console.log(undefined ?? 2); // 2
+console.log(null ?? undefined); // undefined - 더 이상 없으니까
+console.log(null ?? 1 ?? 2); // 1
+console.log(false ?? 1 ?? 2); // false
+console.log(0 ?? 1 ?? 2); // 0
+
+// 삼항(Ternary)
+const a = 1;
+
+if (a < 2) {
+  console.log("참!");
+} else {
+  console.log("거짓...");
 }
 
-// OR(또는) 연산자
-if (a || b) {
-  console.log("하나 이상이 참!");
+// 삼항 연산자
+// 조건 ? 참 : 거짓
+console.log(a < 2 ? "참!" : "거짓...");
+
+function getAlert(message) {
+  return message ? message : "메시지가 존재하지 않습니다.";
 }
 
-// && 연산자는 왼쪽에서부터 거짓을 찾음
-console.log(true && false);
-console.log(1 && 0); // 0: 피연산자가 반환될 수 있음
-console.log(1 && 2 && 0); // 0
-console.log(1 && 0 && 2); // 0
-console.log(1 && 2 && 3); // 3
-console.log("A" && "B" && ""); //
-console.log("A" && "B" && "C"); // C
-
-// || 연산자는 왼쪽에서부터 참을 찾음
-console.log(false || true); // true
-console.log(0 || 1); // 1
-console.log(false || 0 || {}); // {}
-console.log(false || [] || null);
-console.log(function () {} || undefined || "");
-console.log(false || 0 || NaN);
+console.log(getAlert("안녕하세요~"));
+console.log(getAlert(""));
+console.log(getAlert());
