@@ -393,42 +393,81 @@
 // console.log(function () {} || undefined || "");
 // console.log(false || 0 || NaN);
 
-// Nullish 병합(Nullish Coalescing)
+// // Nullish 병합(Nullish Coalescing)
 
-const n = 0;
+// const n = 0;
 
-// OR 연산자를 사용한 경우
-const num1 = n || 7; // 왼쪽부터 거짓이 아닌 데이터를 찾음
-console.log(num1); // 7
+// // OR 연산자를 사용한 경우
+// const num1 = n || 7; // 왼쪽부터 거짓이 아닌 데이터를 찾음
+// console.log(num1); // 7
 
-// Nullish 병합 연산자를 사용한 경우
-const num2 = n ?? 7; // 왼쪽부터 null이나 undefined가 아닌 데이터를 찾음 (범위 축소)
-console.log(num2); // 0
+// // Nullish 병합 연산자를 사용한 경우
+// const num2 = n ?? 7; // 왼쪽부터 null이나 undefined가 아닌 데이터를 찾음 (범위 축소)
+// console.log(num2); // 0
 
-console.log(null ?? 1); // 1
-console.log(undefined ?? 2); // 2
-console.log(null ?? undefined); // undefined - 더 이상 없으니까
-console.log(null ?? 1 ?? 2); // 1
-console.log(false ?? 1 ?? 2); // false
-console.log(0 ?? 1 ?? 2); // 0
+// console.log(null ?? 1); // 1
+// console.log(undefined ?? 2); // 2
+// console.log(null ?? undefined); // undefined - 더 이상 없으니까
+// console.log(null ?? 1 ?? 2); // 1
+// console.log(false ?? 1 ?? 2); // false
+// console.log(0 ?? 1 ?? 2); // 0
 
-// 삼항(Ternary)
-const a = 1;
+// // 삼항(Ternary)
+// const a = 1;
 
-if (a < 2) {
-  console.log("참!");
-} else {
-  console.log("거짓...");
+// if (a < 2) {
+//   console.log("참!");
+// } else {
+//   console.log("거짓...");
+// }
+
+// // 삼항 연산자
+// // 조건 ? 참 : 거짓
+// console.log(a < 2 ? "참!" : "거짓...");
+
+// function getAlert(message) {
+//   return message ? message : "메시지가 존재하지 않습니다.";
+// }
+
+// console.log(getAlert("안녕하세요~"));
+// console.log(getAlert(""));
+// console.log(getAlert());
+
+// 전개 연산자(Spread Operator)
+
+const a = [1, 2, 3];
+
+console.log(...a); // 1 2 3
+console.log(1, 2, 3); // 1 2 3
+
+const b = [4, 5, 6];
+
+const c = a.concat(b);
+console.log(c); // [1, 2, 3, 4, 5, 6]
+
+const d = [a, b];
+console.log(d); // [Array(3), Array(3)]
+
+const e = [...a, ...b];
+console.log(e); // [1, 2, 3, 4, 5, 6]
+
+const objA = { x: 1, y: 2 };
+const objB = { y: 3, z: 4 };
+
+const objC = Object.assign({}, objA, objB);
+console.log(objC); // {x: 1, y: 3, z: 4}
+
+const objD = { objA, objB };
+console.log(objD); // {objA: {…}, objB: {…}}
+
+const objE = { ...objA, ...objB };
+console.log(objE); // {x: 1, y: 3, z: 4}
+
+function fn(x, y, z) {
+  console.log(x, y, z);
 }
 
-// 삼항 연산자
-// 조건 ? 참 : 거짓
-console.log(a < 2 ? "참!" : "거짓...");
+fn(1, 2, 3); // 1 2 3
 
-function getAlert(message) {
-  return message ? message : "메시지가 존재하지 않습니다.";
-}
-
-console.log(getAlert("안녕하세요~"));
-console.log(getAlert(""));
-console.log(getAlert());
+const arrA = [1, 2, 3];
+fn(...arrA); // 1 2 3
