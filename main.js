@@ -322,41 +322,73 @@
 // console.log(--m);
 // console.log(m);
 
-// 부정(Negation)
+// // 부정(Negation)
 
-console.log(!true);
-console.log(!false);
+// console.log(!true);
+// console.log(!false);
 
-console.log(!0); // true
-console.log(!!0); // false
-console.log(!!!0); // true
-console.log(!null); // true
-console.log(!undefined); // true
-console.log(!NaN); // true
-console.log(!""); // true
+// console.log(!0); // true
+// console.log(!!0); // false
+// console.log(!!!0); // true
+// console.log(!null); // true
+// console.log(!undefined); // true
+// console.log(!NaN); // true
+// console.log(!""); // true
 
-console.log(!{}); // false
-console.log(![]); // false
+// console.log(!{}); // false
+// console.log(![]); // false
 
-// 비교(Comparison)
+// // 비교(Comparison)
 
-const a = 1;
-const b = 3;
+// const a = 1;
+// const b = 3;
 
-// 동등(형 변환!)
-console.log(a == b); // false
+// // 동등(형 변환!) - 동등 연산자의 사용은 가급적 피하기❗
+// console.log(a == b); // false
 
-// 부등(형 변환!)
-console.log(a != b); // true
+// // 부등(형 변환!)
+// console.log(a != b); // true
 
-// 일치
-console.log(a === b); // false
+// // 일치
+// console.log(a === b); // false
 
-// 불일치
-console.log(a !== b); // true
+// // 불일치
+// console.log(a !== b); // true
 
-// 큼
-console.log(a > b); // false
+// // 큼
+// console.log(a > b); // false
 
-// 크거나 같음
-console.log(a >= b); // false
+// // 크거나 같음
+// console.log(a >= b); // false
+
+// 논리(Logical)
+
+const a = true;
+const b = true;
+
+// AND(그리고) 연산자
+if (a && b) {
+  console.log("모두가 참");
+}
+
+// OR(또는) 연산자
+if (a || b) {
+  console.log("하나 이상이 참!");
+}
+
+// && 연산자는 왼쪽에서부터 거짓을 찾음
+console.log(true && false);
+console.log(1 && 0); // 0: 피연산자가 반환될 수 있음
+console.log(1 && 2 && 0); // 0
+console.log(1 && 0 && 2); // 0
+console.log(1 && 2 && 3); // 3
+console.log("A" && "B" && ""); //
+console.log("A" && "B" && "C"); // C
+
+// || 연산자는 왼쪽에서부터 참을 찾음
+console.log(false || true); // true
+console.log(0 || 1); // 1
+console.log(false || 0 || {}); // {}
+console.log(false || [] || null);
+console.log(function () {} || undefined || "");
+console.log(false || 0 || NaN);
