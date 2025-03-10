@@ -433,41 +433,80 @@
 // console.log(getAlert(""));
 // console.log(getAlert());
 
-// 전개 연산자(Spread Operator)
+// // 전개 연산자(Spread Operator)
 
-const a = [1, 2, 3];
+// const a = [1, 2, 3];
 
-console.log(...a); // 1 2 3
-console.log(1, 2, 3); // 1 2 3
+// console.log(...a); // 1 2 3
+// console.log(1, 2, 3); // 1 2 3
 
-const b = [4, 5, 6];
+// const b = [4, 5, 6];
 
-const c = a.concat(b);
-console.log(c); // [1, 2, 3, 4, 5, 6]
+// const c = a.concat(b);
+// console.log(c); // [1, 2, 3, 4, 5, 6]
 
-const d = [a, b];
-console.log(d); // [Array(3), Array(3)]
+// const d = [a, b];
+// console.log(d); // [Array(3), Array(3)]
 
-const e = [...a, ...b];
-console.log(e); // [1, 2, 3, 4, 5, 6]
+// const e = [...a, ...b];
+// console.log(e); // [1, 2, 3, 4, 5, 6]
 
-const objA = { x: 1, y: 2 };
-const objB = { y: 3, z: 4 };
+// const objA = { x: 1, y: 2 };
+// const objB = { y: 3, z: 4 };
 
-const objC = Object.assign({}, objA, objB);
-console.log(objC); // {x: 1, y: 3, z: 4}
+// const objC = Object.assign({}, objA, objB);
+// console.log(objC); // {x: 1, y: 3, z: 4}
 
-const objD = { objA, objB };
-console.log(objD); // {objA: {…}, objB: {…}}
+// const objD = { objA, objB };
+// console.log(objD); // {objA: {…}, objB: {…}}
 
-const objE = { ...objA, ...objB };
-console.log(objE); // {x: 1, y: 3, z: 4}
+// const objE = { ...objA, ...objB };
+// console.log(objE); // {x: 1, y: 3, z: 4}
 
-function fn(x, y, z) {
-  console.log(x, y, z);
-}
+// function fn(x, y, z) {
+//   console.log(x, y, z);
+// }
 
-fn(1, 2, 3); // 1 2 3
+// fn(1, 2, 3); // 1 2 3
 
-const arrA = [1, 2, 3];
-fn(...arrA); // 1 2 3
+// const arrA = [1, 2, 3];
+// fn(...arrA); // 1 2 3
+
+// ✅ 구조 분해 할당 (Destructuring assignment)
+const arr = [1, 2, 3];
+// const a = arr[0];
+// const b = arr[1];
+// const c = arr[2];
+const [a, b, c] = arr;
+
+let e = 0;
+let f = 0;
+[, e, f] = arr;
+
+console.log(a, b, c); // 1 2 3
+console.log(e, f); // 2 3
+
+const [g, ...rest] = arr;
+console.log(g, rest); // 1 (2) [2, 3]
+
+const obj = {
+  a1: 1,
+  b1: 2,
+  c1: 3,
+};
+
+const { a1, b1 } = obj; // 속성 이름으로 해당하는 것 찾을 수 있음
+const { c1 } = obj;
+const { d1 } = obj;
+const { e1: four = 4 } = obj;
+const { a1: hyunsoo } = obj;
+
+console.log(a1, b1); // 1 2
+console.log(c1); // 3
+console.log(d1); // undefined
+// console.log(e1); // main.js:507 Uncaught ReferenceError: e1 is not defined
+console.log(four); // 4
+console.log(hyunsoo); // 1
+
+const { f1, ...rest1 } = obj;
+console.log(f1, rest1); // undefined {a1: 1, b1: 2, c1: 3}
