@@ -511,33 +511,78 @@
 // const { f1, ...rest1 } = obj;
 // console.log(f1, rest1); // undefined {a1: 1, b1: 2, c1: 3}
 
-// ✅ 선택적 체이닝(Optional Chaining)
+// // ✅ 선택적 체이닝(Optional Chaining)
 
-const user = {};
+// const user = {};
 
-console.log(user.name); // undefined
+// console.log(user.name); // undefined
 
-const user1 = null;
-// console.log(user1.name); //main.js:521 Uncaught TypeError: Cannot read properties of null (reading 'name')
-console.log(user1?.name); // undefined
+// const user1 = null;
+// // console.log(user1.name); //main.js:521 Uncaught TypeError: Cannot read properties of null (reading 'name')
+// console.log(user1?.name); // undefined
 
-const userA = {
-  name: "Jane",
-  age: 85,
-  address: {
-    country: "Korea",
-    city: "Seoul",
-  },
-};
+// const userA = {
+//   name: "Jane",
+//   age: 85,
+//   address: {
+//     country: "Korea",
+//     city: "Seoul",
+//   },
+// };
 
-const userB = {
-  name: "Ruby",
-  age: 22,
-};
+// const userB = {
+//   name: "Ruby",
+//   age: 22,
+// };
 
-function getCity(user) {
-  return user?.address?.city || "주소 없음";
+// function getCity(user) {
+//   return user?.address?.city || "주소 없음";
+// }
+
+// console.log(getCity(userA)); // Seoul
+// console.log(getCity(userB)); // 주소 없음
+
+// ✅ If, Switch 조건문
+
+// If 조건문
+
+function isPositive(number) {
+  if (number > 0) {
+    return "양수";
+  }
 }
 
-console.log(getCity(userA)); // Seoul
-console.log(getCity(userB)); // 주소 없음
+console.log(isPositive(1));
+console.log(isPositive(-1)); // undefined
+
+function isPositive2(number) {
+  if (number > 0) {
+    return "양수";
+  } else if (number < 0) {
+    return "음수";
+  } else {
+    return "0";
+  }
+}
+
+console.log(isPositive2(-1));
+
+// Switch 조건문
+
+function price(fruit) {
+  switch (fruit) {
+    case "Apple":
+      return 1000;
+    case "Banana":
+      return 1500;
+    case "Cherry":
+      return 2000;
+    default:
+      return 0;
+  }
+}
+
+console.log(price("Apple"));
+console.log(price("Banana"));
+console.log(price("Cherry"));
+console.log(price("Hello"));
