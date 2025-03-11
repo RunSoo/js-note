@@ -587,52 +587,66 @@
 // console.log(price("Cherry"));
 // console.log(price("Hello"));
 
-// ✅ For, For of, For in 반복문
+// // ✅ For, For of, For in 반복문
 
-// For 반복문
+// // For 반복문
 
-for (let i = 0; i < 10; i += 1) {
-  console.log(i);
+// for (let i = 0; i < 10; i += 1) {
+//   console.log(i);
+// }
+
+// for (let i = 9; i > -1; i -= 1) {
+//   if (i % 2 === 0) {
+//     continue;
+//   }
+//   console.log(i);
+// }
+
+// // For of 반복문
+// const fruits = ["Apple", "Banana", "Cherry"];
+
+// for (let i = 0; i < fruits.length; i += 1) {
+//   console.log(fruits[i]);
+// }
+
+// for (const fruit of fruits) {
+//   console.log(fruit);
+// }
+
+// const users = [
+//   { name: "Hans", age: 20 },
+//   { name: "Leo", age: 23 },
+//   { name: "Louisa", age: 30 },
+// ];
+
+// for (const user of users) {
+//   console.log(user.name);
+// }
+
+// // For in 반복문
+
+// const user = {
+//   name: "Henry",
+//   age: 20,
+//   isValid: true,
+//   email: "henry@gmail.com",
+// };
+
+// for (const key in user) {
+//   console.log(key);
+//   console.log(user[key]);
+// }
+
+// ✅ while, do while 반복문
+
+// while 반복문
+
+let n = 0;
+while (n < 4) {
+  console.log(n);
+  n += 1;
 }
-
-for (let i = 9; i > -1; i -= 1) {
-  if (i % 2 === 0) {
-    continue;
-  }
-  console.log(i);
-}
-
-// For of 반복문
-const fruits = ["Apple", "Banana", "Cherry"];
-
-for (let i = 0; i < fruits.length; i += 1) {
-  console.log(fruits[i]);
-}
-
-for (const fruit of fruits) {
-  console.log(fruit);
-}
-
-const users = [
-  { name: "Hans", age: 20 },
-  { name: "Leo", age: 23 },
-  { name: "Louisa", age: 30 },
-];
-
-for (const user of users) {
-  console.log(user.name);
-}
-
-// For in 반복문
-
-const user = {
-  name: "Henry",
-  age: 20,
-  isValid: true,
-  email: "henry@gmail.com",
-};
-
-for (const key in user) {
-  console.log(key);
-  console.log(user[key]);
-}
+do {
+  console.log(n);
+  n += 1;
+} while (n < 4);
