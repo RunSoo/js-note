@@ -542,47 +542,97 @@
 // console.log(getCity(userA)); // Seoul
 // console.log(getCity(userB)); // 주소 없음
 
-// ✅ If, Switch 조건문
+// // ✅ If, Switch 조건문
 
-// If 조건문
+// // If 조건문
 
-function isPositive(number) {
-  if (number > 0) {
-    return "양수";
-  }
+// function isPositive(number) {
+//   if (number > 0) {
+//     return "양수";
+//   }
+// }
+
+// console.log(isPositive(1));
+// console.log(isPositive(-1)); // undefined
+
+// function isPositive2(number) {
+//   if (number > 0) {
+//     return "양수";
+//   } else if (number < 0) {
+//     return "음수";
+//   } else {
+//     return "0";
+//   }
+// }
+
+// console.log(isPositive2(-1));
+
+// // Switch 조건문
+
+// function price(fruit) {
+//   switch (fruit) {
+//     case "Apple":
+//       return 1000;
+//     case "Banana":
+//       return 1500;
+//     case "Cherry":
+//       return 2000;
+//     default:
+//       return 0;
+//   }
+// }
+
+// console.log(price("Apple"));
+// console.log(price("Banana"));
+// console.log(price("Cherry"));
+// console.log(price("Hello"));
+
+// ✅ For, For of, For in 반복문
+
+// For 반복문
+
+for (let i = 0; i < 10; i += 1) {
+  console.log(i);
 }
 
-console.log(isPositive(1));
-console.log(isPositive(-1)); // undefined
-
-function isPositive2(number) {
-  if (number > 0) {
-    return "양수";
-  } else if (number < 0) {
-    return "음수";
-  } else {
-    return "0";
+for (let i = 9; i > -1; i -= 1) {
+  if (i % 2 === 0) {
+    continue;
   }
+  console.log(i);
 }
 
-console.log(isPositive2(-1));
+// For of 반복문
+const fruits = ["Apple", "Banana", "Cherry"];
 
-// Switch 조건문
-
-function price(fruit) {
-  switch (fruit) {
-    case "Apple":
-      return 1000;
-    case "Banana":
-      return 1500;
-    case "Cherry":
-      return 2000;
-    default:
-      return 0;
-  }
+for (let i = 0; i < fruits.length; i += 1) {
+  console.log(fruits[i]);
 }
 
-console.log(price("Apple"));
-console.log(price("Banana"));
-console.log(price("Cherry"));
-console.log(price("Hello"));
+for (const fruit of fruits) {
+  console.log(fruit);
+}
+
+const users = [
+  { name: "Hans", age: 20 },
+  { name: "Leo", age: 23 },
+  { name: "Louisa", age: 30 },
+];
+
+for (const user of users) {
+  console.log(user.name);
+}
+
+// For in 반복문
+
+const user = {
+  name: "Henry",
+  age: 20,
+  isValid: true,
+  email: "henry@gmail.com",
+};
+
+for (const key in user) {
+  console.log(key);
+  console.log(user[key]);
+}
