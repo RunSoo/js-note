@@ -60,80 +60,127 @@
 // // main.js:52 숫자를 입력해주세요.
 // // main.js:59 0
 
-// ✅ 매개변수 패턴 (Parameter pattern)
-//// 기본값 (Default value)
+// // ✅ 매개변수 패턴 (Parameter pattern)
+// //// 기본값 (Default value)
+
+// function sum(a, b) {
+//   return a + b;
+// }
+
+// console.log(sum(1, 2));
+// console.log(sum(7)); // NaN
+
+// function sum1(a, b = 1) {
+//   return a + b;
+// }
+
+// console.log(sum1(1, 2));
+// console.log(sum1(7));
+
+// //// 구조 분해 할당 (Destructuring assignment)
+// const user = {
+//   name: "Hess",
+//   age: 20,
+// };
+
+// function getName(user) {
+//   const { name } = user;
+//   return name;
+// }
+
+// function getName1({ name }) {
+//   return name;
+// }
+
+// function getEmail({ email = "이메일이 없습니다." }) {
+//   return email;
+// }
+
+// console.log(getName(user));
+// console.log(getName1(user));
+// console.log(getEmail(user)); // 이메일이 없습니다.
+
+// const fruits = ["Apple", "Banana", "Cherry"];
+// const numbers = [1, 2, 3, 4, 5, 6, 7];
+
+// function getSecondItem(array) {
+//   return array[1];
+// }
+
+// function getSecondItem1([, b]) {
+//   return b;
+// }
+
+// console.log(getSecondItem(fruits)); // Banana
+// console.log(getSecondItem1(fruits));
+// console.log(getSecondItem1(numbers));
+
+// //// 나머지 매개변수 (Rest parameter)
+// function sum2(...rest) {
+//   console.log(rest);
+//   console.log(arguments);
+//   return rest.reduce(function (acc, cur) {
+//     return acc + cur;
+//   }, 0);
+// }
+
+// console.log(sum2(1, 2));
+// // (2) [1, 2]
+// // main.js:121 Arguments(2) [1, 2, callee: (...), Symbol(Symbol.iterator): ƒ]
+// // main.js:127 3
+// console.log(sum2(1, 2, 3, 4));
+// (4)[(1, 2, 3, 4)];
+// // main.js:121
+// // Arguments(4) [1, 2, 3, 4, callee: (...), Symbol(Symbol.iterator): ƒ]
+// // main.js:131 10
+// console.log(sum2(1, 2, 3, 4, 5, 6, 7, 8, 9));
+// // (9) [1, 2, 3, 4, 5, 6, 7, 8, 9]
+// // main.js:121 Arguments(9) [1, 2, 3, 4, 5, 6, 7, 8, 9, callee: (...), Symbol(Symbol.iterator): ƒ]
+// // main.js:136 45
+
+// ✅ 화살표 함수 (Arrow function)
+
+// function sum() {}
+// const sum = function () {}
+// const sum = () => {}; // ECMA6 이후 등장, 함수 선언 아니고 표현
 
 function sum(a, b) {
   return a + b;
 }
 
 console.log(sum(1, 2));
-console.log(sum(7)); // NaN
+console.log(sum(10, 20));
 
-function sum1(a, b = 1) {
+const sum1 = (a, b) => {
   return a + b;
-}
-
-console.log(sum1(1, 2));
-console.log(sum1(7));
-
-//// 구조 분해 할당 (Destructuring assignment)
-const user = {
-  name: "Hess",
-  age: 20,
 };
 
-function getName(user) {
-  const { name } = user;
-  return name;
-}
+const sum2 = (a, b) => a + b;
 
-function getName1({ name }) {
-  return name;
-}
+console.log(sum1(1, 2));
+console.log(sum1(10, 20));
 
-function getEmail({ email = "이메일이 없습니다." }) {
-  return email;
-}
+const a = () => {};
+const b = (x) => {}; // 하나일 때는 소괄호 생략 가능
+const c = (x, y) => {};
+const d = (x) => {
+  return x * x;
+}; // 중괄호와 return 같이 생략 가능
+const e = (x) => x * x;
+const f = (x) => {
+  console.log(x * x);
+  return x * x; // 이런 경우는 중괄호와 return 생략 불가능
+};
+const g = () => {
+  return { a: 1 };
+};
+// const h = () => {
+//   a: 1;
+// }; // 이거는 잘못됨
+const h = () => ({ a: 1 });
+const i = () => {
+  return [1, 2, 3];
+};
+const j = () => [1, 2, 3];
 
-console.log(getName(user));
-console.log(getName1(user));
-console.log(getEmail(user)); // 이메일이 없습니다.
-
-const fruits = ["Apple", "Banana", "Cherry"];
-const numbers = [1, 2, 3, 4, 5, 6, 7];
-
-function getSecondItem(array) {
-  return array[1];
-}
-
-function getSecondItem1([, b]) {
-  return b;
-}
-
-console.log(getSecondItem(fruits)); // Banana
-console.log(getSecondItem1(fruits));
-console.log(getSecondItem1(numbers));
-
-//// 나머지 매개변수 (Rest parameter)
-function sum2(...rest) {
-  console.log(rest);
-  console.log(arguments);
-  return rest.reduce(function (acc, cur) {
-    return acc + cur;
-  }, 0);
-}
-
-console.log(sum2(1, 2));
-// (2) [1, 2]
-// main.js:121 Arguments(2) [1, 2, callee: (...), Symbol(Symbol.iterator): ƒ]
-// main.js:127 3
-console.log(sum2(1, 2, 3, 4));
-(4)[(1, 2, 3, 4)];
-// main.js:121
-// Arguments(4) [1, 2, 3, 4, callee: (...), Symbol(Symbol.iterator): ƒ]
-// main.js:131 10
-console.log(sum2(1, 2, 3, 4, 5, 6, 7, 8, 9));
-// (9) [1, 2, 3, 4, 5, 6, 7, 8, 9]
-// main.js:121 Arguments(9) [1, 2, 3, 4, 5, 6, 7, 8, 9, callee: (...), Symbol(Symbol.iterator): ƒ]
-// main.js:136 45
+// this 키워드의 차이가 있음
