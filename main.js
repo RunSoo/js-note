@@ -138,49 +138,89 @@
 // // main.js:121 Arguments(9) [1, 2, 3, 4, 5, 6, 7, 8, 9, callee: (...), Symbol(Symbol.iterator): ƒ]
 // // main.js:136 45
 
-// ✅ 화살표 함수 (Arrow function)
+// // ✅ 화살표 함수 (Arrow function)
 
-// function sum() {}
-// const sum = function () {}
-// const sum = () => {}; // ECMA6 이후 등장, 함수 선언 아니고 표현
+// // function sum() {}
+// // const sum = function () {}
+// // const sum = () => {}; // ECMA6 이후 등장, 함수 선언 아니고 표현
 
-function sum(a, b) {
-  return a + b;
-}
+// function sum(a, b) {
+//   return a + b;
+// }
 
-console.log(sum(1, 2));
-console.log(sum(10, 20));
+// console.log(sum(1, 2));
+// console.log(sum(10, 20));
 
-const sum1 = (a, b) => {
-  return a + b;
+// const sum1 = (a, b) => {
+//   return a + b;
+// };
+
+// const sum2 = (a, b) => a + b;
+
+// console.log(sum1(1, 2));
+// console.log(sum1(10, 20));
+
+// const a = () => {};
+// const b = (x) => {}; // 하나일 때는 소괄호 생략 가능
+// const c = (x, y) => {};
+// const d = (x) => {
+//   return x * x;
+// }; // 중괄호와 return 같이 생략 가능
+// const e = (x) => x * x;
+// const f = (x) => {
+//   console.log(x * x);
+//   return x * x; // 이런 경우는 중괄호와 return 생략 불가능
+// };
+// const g = () => {
+//   return { a: 1 };
+// };
+// // const h = () => {
+// //   a: 1;
+// // }; // 이거는 잘못됨
+// const h = () => ({ a: 1 });
+// const i = () => {
+//   return [1, 2, 3];
+// };
+// const j = () => [1, 2, 3];
+
+// // this 키워드의 차이가 있음
+
+// ✅ 즉시실행함수 (IIFE, Immediately-Invoked Function Expression)
+
+const a = 7;
+
+const double = () => {
+  console.log(a * 2);
 };
 
-const sum2 = (a, b) => a + b;
+double();
 
-console.log(sum1(1, 2));
-console.log(sum1(10, 20));
+// 별도의 이름 없이 실행되기를 바란다면 익명 함수로 즉시 실행 함수
+(() => {
+  console.log(a * 2);
+})();
 
-const a = () => {};
-const b = (x) => {}; // 하나일 때는 소괄호 생략 가능
-const c = (x, y) => {};
-const d = (x) => {
-  return x * x;
-}; // 중괄호와 return 같이 생략 가능
-const e = (x) => x * x;
-const f = (x) => {
-  console.log(x * x);
-  return x * x; // 이런 경우는 중괄호와 return 생략 불가능
-};
-const g = () => {
-  return { a: 1 };
-};
-// const h = () => {
-//   a: 1;
-// }; // 이거는 잘못됨
-const h = () => ({ a: 1 });
-const i = () => {
-  return [1, 2, 3];
-};
-const j = () => [1, 2, 3];
+(() => {})(); // (F)()
+(function () {})(); // (F)()
+// (function () {}()); // (F())
+// !function(){}(); // !F()
+// +function(){}(); // +F()
 
-// this 키워드의 차이가 있음
+((a, b) => {
+  console.log(a);
+  console.log(b);
+})(1, 2);
+
+// 다양한 전역 데이터들의 이름을 간소화할 수 있음
+((a, b) => {
+  console.log(a); // 해당하는 객체에 대해 유추할 수 없는 이름으로 바꿔 쓸 수 있음
+  console.log(b);
+})(window, document);
+// Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+// main.js:217 #document (http://localhost:1234/)
+
+((a, b) => {
+  console.log(a.innerWidth); // 150
+  console.log(b.body);
+  150; // <body>​<h1>​Hello world​</h1>​</body>​
+})(window, document);
