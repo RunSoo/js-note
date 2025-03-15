@@ -185,42 +185,89 @@
 
 // // this 키워드의 차이가 있음
 
-// ✅ 즉시실행함수 (IIFE, Immediately-Invoked Function Expression)
+// // ✅ 즉시실행함수 (IIFE, Immediately-Invoked Function Expression)
 
-const a = 7;
+// const a = 7;
 
-const double = () => {
-  console.log(a * 2);
+// const double = () => {
+//   console.log(a * 2);
+// };
+
+// double();
+
+// // 별도의 이름 없이 실행되기를 바란다면 익명 함수로 즉시 실행 함수
+// (() => {
+//   console.log(a * 2);
+// })();
+
+// (() => {})(); // (F)()
+// (function () {})(); // (F)()
+// // (function () {}()); // (F())
+// // !function(){}(); // !F()
+// // +function(){}(); // +F()
+
+// ((a, b) => {
+//   console.log(a);
+//   console.log(b);
+// })(1, 2);
+
+// // 다양한 전역 데이터들의 이름을 간소화할 수 있음
+// ((a, b) => {
+//   console.log(a); // 해당하는 객체에 대해 유추할 수 없는 이름으로 바꿔 쓸 수 있음
+//   console.log(b);
+// })(window, document);
+// // Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+// // main.js:217 #document (http://localhost:1234/)
+
+// ((a, b) => {
+//   console.log(a.innerWidth); // 150
+//   console.log(b.body);
+//   150; // <body>​<h1>​Hello world​</h1>​</body>​
+// })(window, document);
+
+// ✅ 콜백 (Callback)
+// 콜백이란 하나의 함수
+
+const a = (callback) => {
+  console.log("A");
+  callback();
 };
 
-double();
+const b = () => {
+  console.log("B");
+};
 
-// 별도의 이름 없이 실행되기를 바란다면 익명 함수로 즉시 실행 함수
-(() => {
-  console.log(a * 2);
-})();
+a(b);
+// A
+// B
 
-(() => {})(); // (F)()
-(function () {})(); // (F)()
-// (function () {}()); // (F())
-// !function(){}(); // !F()
-// +function(){}(); // +F()
+const sum = (a, b, c) => {
+  setTimeout(() => {
+    c(a + b);
+    return a + b;
+  }, 1000);
+};
 
-((a, b) => {
-  console.log(a);
-  console.log(b);
-})(1, 2);
+sum(1, 2, (value) => {
+  console.log(value);
+});
 
-// 다양한 전역 데이터들의 이름을 간소화할 수 있음
-((a, b) => {
-  console.log(a); // 해당하는 객체에 대해 유추할 수 없는 이름으로 바꿔 쓸 수 있음
-  console.log(b);
-})(window, document);
-// Window {window: Window, self: Window, document: document, name: '', location: Location, …}
-// main.js:217 #document (http://localhost:1234/)
+sum(3, 7, (value) => console.log(value));
 
-((a, b) => {
-  console.log(a.innerWidth); // 150
-  console.log(b.body);
-  150; // <body>​<h1>​Hello world​</h1>​</body>​
-})(window, document);
+// https://www.gstatic.com/webp/gallery/4.jpg
+
+const loadImage = (url, cb) => {
+  const imgEl = document.createElement("img");
+  imgEl.src = url;
+  imgEl.addEventListener("load", () => {
+    setTimeout(() => {
+      cb(imgEl);
+    }, 2000);
+  });
+};
+
+const conatinerEl = document.querySelector(".container");
+loadImage("https://www.gstatic.com/webp/gallery/4.jpg", (imgEl) => {
+  conatinerEl.innerHTML = "";
+  conatinerEl.append(imgEl);
+});
