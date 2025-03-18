@@ -299,16 +299,123 @@
 
 // console.log(getRootUser(userD));
 
-// ✅ 호출 스케줄링 (Scheduling a function call)
+// // ✅ 호출 스케줄링 (Scheduling a function call)
 
-const hello = () => console.log(`hello~`);
+// const hello = () => console.log(`hello~`);
 
-const timeout = setTimeout(hello, 2000);
-const timeInterval = setInterval(hello, 2000); // 2초에 한번씩 실행
+// const timeout = setTimeout(hello, 2000);
+// const timeInterval = setInterval(hello, 2000); // 2초에 한번씩 실행
 
-const h1El = document.querySelector("h1");
-h1El.addEventListener("click", () => {
-  console.log("Clear!");
-  clearInterval(timeInterval);
-  clearTimeout(timeout);
-});
+// const h1El = document.querySelector("h1");
+// h1El.addEventListener("click", () => {
+//   console.log("Clear!");
+//   clearInterval(timeInterval);
+//   clearTimeout(timeout);
+// });
+
+// ✅⭐ this
+
+//// 📌 일반 함수의 this는 **호출 위치**에서 정의
+//// 📌`화살표 함수의 this는 **자신이 선언된 함수(렉시컬) 범위**에서 정의
+
+const user = {
+  firstName: "Henry",
+  lastName: "Smith",
+  age: 85,
+  getFullName: function () {
+    return `${this.firstName} ${this.lastName}`;
+  }, // 여기서 this는 getFullName이라는 속성이 들어있는 해당하는 객체 데이터
+};
+
+console.log(user.getFullName()); // 호출된 위치에서 연결된 객체 데이터가 user
+
+const user1 = {
+  firstName: "Henry",
+  lastName: "Smith",
+  age: 85,
+  getFullName: () => {
+    return `${this.firstName} ${this.lastName}`;
+  }, // 자신된 선언된 함수의 내용을 감싸고 있는 외부의 또 다른 함수를 기준으로 해서 this를 사용
+  // 이 부분 함수 감싸고 있는 다른 함수 없기 때문에 undefined
+};
+
+console.log(user1.getFullName()); // undefined undefined
+
+function user2() {
+  this.firstName = "Nancy";
+  this.lastName = "Abbot";
+
+  return {
+    firstName: "Henry",
+    lastName: "Smith",
+    age: 85,
+    getFullName: () => {
+      return `${this.firstName} ${this.lastName}`;
+    },
+  };
+}
+
+const u = user2();
+console.log(u.getFullName()); // Nancy Abbot
+
+function user3() {
+  this.firstName = "Nancy";
+  this.lastName = "Abbot";
+
+  return {
+    firstName: "Henry",
+    lastName: "Smith",
+    age: 85,
+    getFullName: function () {
+      return `${this.firstName} ${this.lastName}`;
+    },
+  };
+}
+
+const u3 = user3();
+console.log(u3.getFullName()); // Henry Smith
+
+function user4() {
+  this.firstName = "Nancy";
+  this.lastName = "Abbot";
+
+  return {
+    firstName: "Henry",
+    lastName: "Smith",
+    age: 85,
+    getFullName() {
+      // function과 :는 생략 가능
+      return `${this.firstName} ${this.lastName}`;
+    },
+  };
+}
+
+const lewis = {
+  firstName: "Lewis",
+  lastName: "Yeon",
+};
+
+const u4 = user4();
+console.log(u4.getFullName());
+console.log(u4.getFullName.call(lewis));
+// getFullName이 호출하는 객체의 대상은 u4가 아니고 lewis가 됨
+
+const timer = {
+  title: "TIMER!",
+  timeout() {
+    console.log(this.title);
+    setTimeout(function () {
+      console.log(this.title); // undefined
+      // 일반 함수에서의 this는 호출 위치에서 정의됨으로
+      // setTimeout이라는 자바스크립트 함수 내부 어디에선가 호출이 됨
+      // 모르는 객체에서 호출
+    }, 1000);
+    setTimeout(() => {
+      console.log(this.title); // TIMER!
+      // 화살표 함수는 자신이 선언된 함수 범위에서 정의됨
+      // timeout이라는 함수가 감싸고 있음. this 키워드 유지해서 작성 가능
+    }, 1000);
+  },
+};
+
+timer.timeout();
