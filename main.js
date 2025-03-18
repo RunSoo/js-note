@@ -272,29 +272,43 @@
 //   conatinerEl.append(imgEl);
 // });
 
-// ✅ 재귀(Recursive)
+// // ✅ 재귀(Recursive)
 
-let i = 0;
-const a = () => {
-  console.log("A");
-  i += 1;
-  if (i < 4) {
-    a();
-  }
-};
+// let i = 0;
+// const a = () => {
+//   console.log("A");
+//   i += 1;
+//   if (i < 4) {
+//     a();
+//   }
+// };
 
-a();
+// a();
 
-const userA = { name: "A", parent: null };
-const userB = { name: "B", parent: userA };
-const userC = { name: "C", parent: userB };
-const userD = { name: "D", parent: userC };
+// const userA = { name: "A", parent: null };
+// const userB = { name: "B", parent: userA };
+// const userC = { name: "C", parent: userB };
+// const userD = { name: "D", parent: userC };
 
-const getRootUser = (user) => {
-  if (user.parent) {
-    return getRootUser(user.parent);
-  }
-  return user;
-};
+// const getRootUser = (user) => {
+//   if (user.parent) {
+//     return getRootUser(user.parent);
+//   }
+//   return user;
+// };
 
-console.log(getRootUser(userD));
+// console.log(getRootUser(userD));
+
+// ✅ 호출 스케줄링 (Scheduling a function call)
+
+const hello = () => console.log(`hello~`);
+
+const timeout = setTimeout(hello, 2000);
+const timeInterval = setInterval(hello, 2000); // 2초에 한번씩 실행
+
+const h1El = document.querySelector("h1");
+h1El.addEventListener("click", () => {
+  console.log("Clear!");
+  clearInterval(timeInterval);
+  clearTimeout(timeout);
+});
