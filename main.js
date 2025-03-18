@@ -225,49 +225,76 @@
 //   150; // <body>​<h1>​Hello world​</h1>​</body>​
 // })(window, document);
 
-// ✅ 콜백 (Callback)
-// 콜백이란 하나의 함수
+// // ✅ 콜백 (Callback)
+// // 콜백이란 하나의 함수
 
-const a = (callback) => {
+// const a = (callback) => {
+//   console.log("A");
+//   callback();
+// };
+
+// const b = () => {
+//   console.log("B");
+// };
+
+// a(b);
+// // A
+// // B
+
+// const sum = (a, b, c) => {
+//   setTimeout(() => {
+//     c(a + b);
+//     return a + b;
+//   }, 1000);
+// };
+
+// sum(1, 2, (value) => {
+//   console.log(value);
+// });
+
+// sum(3, 7, (value) => console.log(value));
+
+// // https://www.gstatic.com/webp/gallery/4.jpg
+
+// const loadImage = (url, cb) => {
+//   const imgEl = document.createElement("img");
+//   imgEl.src = url;
+//   imgEl.addEventListener("load", () => {
+//     setTimeout(() => {
+//       cb(imgEl);
+//     }, 2000);
+//   });
+// };
+
+// const conatinerEl = document.querySelector(".container");
+// loadImage("https://www.gstatic.com/webp/gallery/4.jpg", (imgEl) => {
+//   conatinerEl.innerHTML = "";
+//   conatinerEl.append(imgEl);
+// });
+
+// ✅ 재귀(Recursive)
+
+let i = 0;
+const a = () => {
   console.log("A");
-  callback();
+  i += 1;
+  if (i < 4) {
+    a();
+  }
 };
 
-const b = () => {
-  console.log("B");
+a();
+
+const userA = { name: "A", parent: null };
+const userB = { name: "B", parent: userA };
+const userC = { name: "C", parent: userB };
+const userD = { name: "D", parent: userC };
+
+const getRootUser = (user) => {
+  if (user.parent) {
+    return getRootUser(user.parent);
+  }
+  return user;
 };
 
-a(b);
-// A
-// B
-
-const sum = (a, b, c) => {
-  setTimeout(() => {
-    c(a + b);
-    return a + b;
-  }, 1000);
-};
-
-sum(1, 2, (value) => {
-  console.log(value);
-});
-
-sum(3, 7, (value) => console.log(value));
-
-// https://www.gstatic.com/webp/gallery/4.jpg
-
-const loadImage = (url, cb) => {
-  const imgEl = document.createElement("img");
-  imgEl.src = url;
-  imgEl.addEventListener("load", () => {
-    setTimeout(() => {
-      cb(imgEl);
-    }, 2000);
-  });
-};
-
-const conatinerEl = document.querySelector(".container");
-loadImage("https://www.gstatic.com/webp/gallery/4.jpg", (imgEl) => {
-  conatinerEl.innerHTML = "";
-  conatinerEl.append(imgEl);
-});
+console.log(getRootUser(userD));
