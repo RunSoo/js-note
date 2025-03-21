@@ -5,14 +5,31 @@
 
 // console.log(hello);
 
+// // ✅
+// // import number, { str as xyz, arr, hello as h } from "./module";
+
+// // console.log(number); // 123
+// // console.log(xyz); // ABC
+// // console.log(arr); // []
+// // console.log(h); // f hello() {}
+
+// import * as abc from "./module";
+
+// console.log(abc);
+
 // ✅
-// import number, { str as xyz, arr, hello as h } from "./module";
+// setTimeout(async () => {
+//   // import("./module").then((abc) => {
+//   //   console.log(abc);
+//   // });
+//   const abc = await import("./module");
+//   console.log(abc);
+// }, 1000);
 
-// console.log(number); // 123
-// console.log(xyz); // ABC
-// console.log(arr); // []
-// console.log(h); // f hello() {}
+// import { a } from "./a";
+// import { b } from "./b";
 
-import * as abc from "./module";
+import { a, b } from "./utils";
 
-console.log(abc);
+console.log(a());
+console.log(b());
