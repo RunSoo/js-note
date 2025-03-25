@@ -335,32 +335,57 @@
 
 // func3();
 
-// ✅ 반복문에서 비동기 처리
+// // ✅ 반복문에서 비동기 처리
 
-const func1 = () => {
-  const getMovies = (movieName) => {
-    return new Promise((resolve) => {
-      fetch(`https://www.omdbapi.com/?apikey=7035c60c&s=${movieName}`)
-        .then((res) => res.json())
-        .then((res) => resolve(res));
-    });
-  };
-  const titles = ["frozen", "avengers", "avatar"];
+// const func1 = () => {
+//   const getMovies = (movieName) => {
+//     return new Promise((resolve) => {
+//       fetch(`https://www.omdbapi.com/?apikey=7035c60c&s=${movieName}`)
+//         .then((res) => res.json())
+//         .then((res) => resolve(res));
+//     });
+//   };
+//   const titles = ["frozen", "avengers", "avatar"];
 
-  titles.forEach(async (title) => {
-    // forEach로는 순서 보장 안됨
-    const movies = await getMovies(title);
-    console.log(title, movies);
-  });
+//   titles.forEach(async (title) => {
+//     // forEach로는 순서 보장 안됨
+//     const movies = await getMovies(title);
+//     console.log(title, movies);
+//   });
 
-  const wrap = async () => {
-    for (const title of titles) {
-      const movies = await getMovies(title);
-      console.log(title, movies);
-    }
-  };
+//   const wrap = async () => {
+//     for (const title of titles) {
+//       const movies = await getMovies(title);
+//       console.log(title, movies);
+//     }
+//   };
 
-  wrap();
+//   wrap();
+// };
+
+// func1();
+
+// ✅ fetch (주소, 옵션)
+// 네트워크를 통해 리소스의 요청(Request) 및 응답(Response)를 처리할 수 있음
+// Promise 인스턴스를 반환
+
+console.log(fetch("https://www.omdbapi.com/?apikey=7035c60c&s=avengers"));
+// Promise {<pending>}
+
+fetch("https://www.omdbapi.com/?apikey=7035c60c&s=avengers", {
+  method: "GET",
+  // headers: { "Content-Type": "application/json" }, // 서버로 전송하는 요청에 대한 정보
+  // body: JSON.stringify({ name: "HESS", age: 20, email: "hess@gmail.com" }), // 요청에 대한 데이터터
+})
+  .then((res) => res.json())
+  .then((json) => console.log(json)); // {Search: Array(10), totalResults: '163', Response: 'True'}
+
+const wrap = async () => {
+  const res = await fetch(
+    "https://www.omdbapi.com/?apikey=7035c60c&s=avengers"
+  );
+  const json = await res.json();
+  console.log(json);
 };
 
-func1();
+wrap();
