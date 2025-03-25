@@ -233,104 +233,134 @@
 
 // wrapMovies();
 
-// ✅ Resolve, Reject, 그리고 에러 핸들링
+// // ✅ Resolve, Reject, 그리고 에러 핸들링
+// const func1 = () => {
+//   const delayAdd = (index, cb, errorCb) => {
+//     setTimeout(() => {
+//       if (index > 10) {
+//         errorCb(`${index}는 10보다 클 수 없습니다`);
+//         return;
+//       }
+//       console.log(index);
+//       cb(index + 1);
+//     }, 1000);
+//   };
+
+//   delayAdd(
+//     13,
+//     (res) => console.log(res),
+//     (err) => console.error(err)
+//   );
+// };
+
+// // func1();/
+
+// const func2 = () => {
+//   const delayAdd = (index) => {
+//     return new Promise((resolve, reject) => {
+//       setTimeout(() => {
+//         if (index > 10) {
+//           reject(`${index}는 10보다 클 수 없습니다`);
+//           return; // resolve 부분만 실행 안되는거고 나머지는 실행될 수 있어서 return 필요
+//         }
+//         console.log(index);
+//         resolve(index + 1);
+//       }, 1000);
+//     });
+//   };
+//   delayAdd(13)
+//     .then((res) => console.log(res)) // resolve로 들어감
+//     .catch((error) => console.log(error))
+//     .finally(console.log("Done!")); // reject로 들어감
+
+//   const wrap = async () => {
+//     const res = await delayAdd(13);
+//     console.log(res);
+//   };
+
+//   const wrap1 = async () => {
+//     try {
+//       const res = await delayAdd(12); // try 문 안에서는 에러 발생하면 그 이후 코드는 실행하지 않음
+//       console.log(res);
+//     } catch (error) {
+//       console.log(error);
+//     } finally {
+//       // 항상 실행
+//       console.log("Done!");
+//     }
+//   };
+
+//   // wrap();
+//   wrap1();
+// };
+// // func2();
+
+// const func3 = () => {
+//   const getMovies = (movieName) => {
+//     return new Promise((resolve, reject) => {
+//       fetch(`https://www.omdbapi.com/?apikey=7035c60c&s=${movieName}`)
+//         .then((res) => res.json())
+//         .then((json) => {
+//           if (json.Response === "False") {
+//             reject(json.Error);
+//           }
+//           resolve(json);
+//         })
+//         .catch((error) => {
+//           reject(error);
+//         });
+//     });
+//   };
+
+//   let loading = true;
+
+//   getMovies("avengers")
+//     .then((movies) => console.log("영화 목록: ", movies))
+//     .catch((error) => console.log("에러 발생:", error))
+//     .finally(() => (loading = false));
+
+//   const wrap = async () => {
+//     try {
+//       const movies = await getMovies("avengers");
+//       console.log("영화 목록: ", movies);
+//     } catch (error) {
+//       console.log("에러 발생: ", error);
+//     } finally {
+//       loading = false;
+//     }
+//   };
+
+//   wrap();
+// };
+
+// func3();
+
+// ✅ 반복문에서 비동기 처리
+
 const func1 = () => {
-  const delayAdd = (index, cb, errorCb) => {
-    setTimeout(() => {
-      if (index > 10) {
-        errorCb(`${index}는 10보다 클 수 없습니다`);
-        return;
-      }
-      console.log(index);
-      cb(index + 1);
-    }, 1000);
-  };
-
-  delayAdd(
-    13,
-    (res) => console.log(res),
-    (err) => console.error(err)
-  );
-};
-
-// func1();/
-
-const func2 = () => {
-  const delayAdd = (index) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (index > 10) {
-          reject(`${index}는 10보다 클 수 없습니다`);
-          return; // resolve 부분만 실행 안되는거고 나머지는 실행될 수 있어서 return 필요
-        }
-        console.log(index);
-        resolve(index + 1);
-      }, 1000);
-    });
-  };
-  delayAdd(13)
-    .then((res) => console.log(res)) // resolve로 들어감
-    .catch((error) => console.log(error))
-    .finally(console.log("Done!")); // reject로 들어감
-
-  const wrap = async () => {
-    const res = await delayAdd(13);
-    console.log(res);
-  };
-
-  const wrap1 = async () => {
-    try {
-      const res = await delayAdd(12); // try 문 안에서는 에러 발생하면 그 이후 코드는 실행하지 않음
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      // 항상 실행
-      console.log("Done!");
-    }
-  };
-
-  // wrap();
-  wrap1();
-};
-// func2();
-
-const func3 = () => {
   const getMovies = (movieName) => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       fetch(`https://www.omdbapi.com/?apikey=7035c60c&s=${movieName}`)
         .then((res) => res.json())
-        .then((json) => {
-          if (json.Response === "False") {
-            reject(json.Error);
-          }
-          resolve(json);
-        })
-        .catch((error) => {
-          reject(error);
-        });
+        .then((res) => resolve(res));
     });
   };
+  const titles = ["frozen", "avengers", "avatar"];
 
-  let loading = true;
-
-  getMovies("avengers")
-    .then((movies) => console.log("영화 목록: ", movies))
-    .catch((error) => console.log("에러 발생:", error))
-    .finally(() => (loading = false));
+  titles.forEach(async (title) => {
+    // forEach로는 순서 보장 안됨
+    const movies = await getMovies(title);
+    console.log(title, movies);
+  });
 
   const wrap = async () => {
-    try {
-      const movies = await getMovies("avengers");
-      console.log("영화 목록: ", movies);
-    } catch (error) {
-      console.log("에러 발생: ", error);
-    } finally {
-      loading = false;
+    for (const title of titles) {
+      const movies = await getMovies(title);
+      console.log(title, movies);
     }
   };
 
   wrap();
 };
 
-func3();
+func1();
