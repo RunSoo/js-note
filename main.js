@@ -71,83 +71,107 @@
 //   console.log("anchor");
 // });
 
-// ✅ 버블링과 캡처링
+// // ✅ 버블링과 캡처링
 
-// 이벤트 전파(버블) 정지
-function stopBubble() {
-  const parentEl = document.querySelector(".parent");
-  const childEl = document.querySelector(".child");
-  const anchorEl = document.querySelector("a");
+// // 이벤트 전파(버블) 정지
+// function stopBubble() {
+//   const parentEl = document.querySelector(".parent");
+//   const childEl = document.querySelector(".child");
+//   const anchorEl = document.querySelector("a");
 
-  window.addEventListener("click", (event) => {
-    console.log("window");
-  });
+//   window.addEventListener("click", (event) => {
+//     console.log("window");
+//   });
 
-  document.body.addEventListener("click", (event) => {
-    console.log("body");
-  });
+//   document.body.addEventListener("click", (event) => {
+//     console.log("body");
+//   });
 
-  parentEl.addEventListener("click", (event) => {
-    event.stopPropagation();
-    console.log("parent");
-  });
+//   parentEl.addEventListener("click", (event) => {
+//     event.stopPropagation();
+//     console.log("parent");
+//   });
 
-  childEl.addEventListener("click", (event) => {
-    console.log("child");
-  });
+//   childEl.addEventListener("click", (event) => {
+//     console.log("child");
+//   });
 
-  anchorEl.addEventListener("click", (event) => {
-    console.log("anchor");
-  });
-}
+//   anchorEl.addEventListener("click", (event) => {
+//     console.log("anchor");
+//   });
+// }
 
-// stopBubble();
+// // stopBubble();
 
-function capture() {
-  const parentEl = document.querySelector(".parent");
-  const childEl = document.querySelector(".child");
-  const anchorEl = document.querySelector("a");
+// function capture() {
+//   const parentEl = document.querySelector(".parent");
+//   const childEl = document.querySelector(".child");
+//   const anchorEl = document.querySelector("a");
 
-  window.addEventListener("click", (event) => {
-    console.log("window");
-  });
+//   window.addEventListener("click", (event) => {
+//     console.log("window");
+//   });
 
-  document.body.addEventListener(
-    "click",
-    (event) => {
-      console.log("body");
-      event.stopPropagation(); // body만 출력
-    },
-    { capture: true } // 상위 요소가 먼저 실행되도록
-  );
+//   document.body.addEventListener(
+//     "click",
+//     (event) => {
+//       console.log("body");
+//       event.stopPropagation(); // body만 출력
+//     },
+//     { capture: true } // 상위 요소가 먼저 실행되도록
+//   );
 
-  parentEl.addEventListener(
-    "click",
-    (event) => {
-      console.log("parent");
-    },
-    { capture: true }
-  );
+//   parentEl.addEventListener(
+//     "click",
+//     (event) => {
+//       console.log("parent");
+//     },
+//     { capture: true }
+//   );
 
-  childEl.addEventListener("click", (event) => {
-    console.log("child");
-  });
+//   childEl.addEventListener("click", (event) => {
+//     console.log("child");
+//   });
 
-  anchorEl.addEventListener("click", (event) => {
-    console.log("anchor");
-  });
-}
+//   anchorEl.addEventListener("click", (event) => {
+//     console.log("anchor");
+//   });
+// }
 
-// capture();
+// // capture();
 
-function func() {
-  const parentEl = document.querySelector(".parent");
-  const handler = () => {
+// function func() {
+//   const parentEl = document.querySelector(".parent");
+//   const handler = () => {
+//     console.log("Parent");
+//   };
+
+//   parentEl.addEventListener("click", handler, { capture: true });
+//   parentEl.removeEventListener("click", handler); // 이러면 제거가 안됨. remove 할 때도 { capture: true }로 같은 옵션 제공해야 함
+// }
+
+// func();
+
+// 핸들러 한 번만 실행
+const parentEl = document.querySelector(".parent");
+
+parentEl.addEventListener(
+  "click",
+  (event) => {
     console.log("Parent");
-  };
+  },
+  { once: true }
+);
 
-  parentEl.addEventListener("click", handler, { capture: true });
-  parentEl.removeEventListener("click", handler); // 이러면 제거가 안됨. remove 할 때도 { capture: true }로 같은 옵션 제공해야 함
-}
-
-func();
+// 기본 동작과 핸들러 실행 분리
+parentEl.addEventListener(
+  "wheel",
+  () => {
+    for (let i = 0; i < 10000; i += 1) {
+      console.log(i);
+    }
+  },
+  {
+    passive: true,
+  }
+);
