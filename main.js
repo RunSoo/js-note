@@ -152,26 +152,49 @@
 
 // func();
 
-// 핸들러 한 번만 실행
+// // 핸들러 한 번만 실행
+// const parentEl = document.querySelector(".parent");
+
+// parentEl.addEventListener(
+//   "click",
+//   (event) => {
+//     console.log("Parent");
+//   },
+//   { once: true }
+// );
+
+// // 기본 동작과 핸들러 실행 분리
+// parentEl.addEventListener(
+//   "wheel",
+//   () => {
+//     for (let i = 0; i < 10000; i += 1) {
+//       console.log(i);
+//     }
+//   },
+//   {
+//     passive: true,
+//   }
+// );
+
+// ✅ 이벤트 위임 (Delegation)
+
+// 비슷한 패턴의 여러 요소에서 이벤트를 핸들링해야 하는 경우
+// 단일 조상 요소에서 제어하는 이벤트 위임 패턴을 사용할 수 있음
+
 const parentEl = document.querySelector(".parent");
+const childEls = document.querySelectorAll(".child");
 
-parentEl.addEventListener(
-  "click",
-  (event) => {
-    console.log("Parent");
-  },
-  { once: true }
-);
+// 모든 대상 요소에 이벤트 등록
+// childEls.forEach((el) => {
+//   el.addEventListener("click", (event) => {
+//     console.log(event.target.textContent);
+//   });
+// });
 
-// 기본 동작과 핸들러 실행 분리
-parentEl.addEventListener(
-  "wheel",
-  () => {
-    for (let i = 0; i < 10000; i += 1) {
-      console.log(i);
-    }
-  },
-  {
-    passive: true,
+// 조상 요소에 이벤트 위임
+parentEl.addEventListener("click", (event) => {
+  const childEl = event.target.closest(".child");
+  if (childEl) {
+    console.log(childEl.textContent);
   }
-);
+});
