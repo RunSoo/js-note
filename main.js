@@ -243,83 +243,98 @@
 
 // useCloser();
 
-// ✅`메모리 누수 (Memory Leak)
+// // ✅`메모리 누수 (Memory Leak)
 
-// 더 이상 필요하지 않은 데이터가 해제되지 못하고 메모리를 계속 차지하는 현상
+// // 더 이상 필요하지 않은 데이터가 해제되지 못하고 메모리를 계속 차지하는 현상
 
-// - 불필요한 전역 변수 사용
-// - 불필요한 노드 참조
-// - 해제하지 않은 타이머
-// - 잘못된 클로저 사용
+// // - 불필요한 전역 변수 사용
+// // - 불필요한 노드 참조
+// // - 해제하지 않은 타이머
+// // - 잘못된 클로저 사용
 
-// 꼭 필요한 것 아니라면 window라는 전역객체의 속성으로 등록하는 것 피하기
-window.hello = "Hello world!";
-window.person = { name: "Heesoo", age: 35 };
+// // 꼭 필요한 것 아니라면 window라는 전역객체의 속성으로 등록하는 것 피하기
+// window.hello = "Hello world!";
+// window.person = { name: "Heesoo", age: 35 };
 
-function func1() {
-  const btn = document.querySelector("button");
-  const parent = document.querySelector(".parent");
+// function func1() {
+//   const btn = document.querySelector("button");
+//   const parent = document.querySelector(".parent");
 
-  btn.addEventListener("click", () => {
-    console.log(parent); // 한 번 클릭해서 제거된 이후에도 계속 참조된 parent 값 나옴. 메모리 값에는 남아있기 때문에
-    parent.remove();
-  });
+//   btn.addEventListener("click", () => {
+//     console.log(parent); // 한 번 클릭해서 제거된 이후에도 계속 참조된 parent 값 나옴. 메모리 값에는 남아있기 때문에
+//     parent.remove();
+//   });
+// }
+
+// // func1();
+
+// function func2() {
+//   const btn = document.querySelector("button");
+//   btn.addEventListener("click", () => {
+//     const parent = document.querySelector(".parent");
+//     console.log(parent);
+//     parent && parent.remove();
+//   });
+// }
+
+// func2();
+
+// function timer() {
+//   let a = 0;
+//   setInterval(() => {
+//     a += 1;
+//   }, 100); // 계속해서 반복하고 있음
+
+//   setTimeout(() => {
+//     console.log(a);
+//   }, 1000);
+// }
+
+// // timer();
+
+// function timer2() {
+//   let a = 0;
+//   const intervalId = setInterval(() => {
+//     a += 1;
+//   }, 100);
+
+//   setTimeout(() => {
+//     console.log(a);
+//     clearInterval(intervalId);
+//   }, 1000);
+// }
+
+// timer2();
+
+// function wrongCloser() {
+//   const getFn = () => {
+//     let a = 0;
+//     return (name) => {
+//       a += 1; // 이거 없더라도
+//       console.log(a); // 여기에서 참조하고 있으니까 가비지 컬렉션이 메모리 비우지 못함
+//       return `Hello ${name}~`;
+//     };
+//   };
+
+//   const fn = getFn();
+//   console.log(fn("Heropy"));
+//   console.log(fn("Neo"));
+//   console.log(fn("Lewis"));
+// }
+
+// wrongCloser();
+
+// ✅ 콜 스택, 테스크 큐, 이벤트 루프
+
+setTimeout(() => {
+  console.log(1);
+}, 0);
+
+console.log(2);
+
+for (let i = 0; i < 1000; i++) {
+  console.log(2);
 }
 
-// func1();
-
-function func2() {
-  const btn = document.querySelector("button");
-  btn.addEventListener("click", () => {
-    const parent = document.querySelector(".parent");
-    console.log(parent);
-    parent && parent.remove();
-  });
-}
-
-func2();
-
-function timer() {
-  let a = 0;
-  setInterval(() => {
-    a += 1;
-  }, 100); // 계속해서 반복하고 있음
-
-  setTimeout(() => {
-    console.log(a);
-  }, 1000);
-}
-
-// timer();
-
-function timer2() {
-  let a = 0;
-  const intervalId = setInterval(() => {
-    a += 1;
-  }, 100);
-
-  setTimeout(() => {
-    console.log(a);
-    clearInterval(intervalId);
-  }, 1000);
-}
-
-timer2();
-
-function wrongCloser() {
-  const getFn = () => {
-    let a = 0;
-    return (name) => {
-      a += 1; // 이거 없더라도
-      console.log(a); // 여기에서 참조하고 있으니까 가비지 컬렉션이 메모리 비우지 못함
-      return `Hello ${name}~`;
-    };
-  };
-
-  const fn = getFn();
-  console.log(fn("Heropy"));
-  console.log(fn("Neo"));
-  console.log(fn("Lewis"));
-}
-
-wrongCloser();
+// 2
+// 1
