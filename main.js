@@ -183,62 +183,143 @@
 // delete user.emails;
 // console.log(user);
 
-// ✅ 클로저 (Closure)
+// // ✅ 클로저 (Closure)
 
-// 함수가 선언될 때의 유효범위(렉시컬 범위)를 기억하고 있다
-// 함수가 외부에서 호출될 때 그 유효범위의 특정 변수를 참조할 수 있는 개념
+// // 함수가 선언될 때의 유효범위(렉시컬 범위)를 기억하고 있다
+// // 함수가 외부에서 호출될 때 그 유효범위의 특정 변수를 참조할 수 있는 개념
 
-function createCount() {
-  let a = 0;
-  return function () {
-    return (a += 1);
-  };
-}
+// function createCount() {
+//   let a = 0;
+//   return function () {
+//     return (a += 1);
+//   };
+// }
 
-const count = createCount();
+// const count = createCount();
 
-console.log(count()); // 1
-console.log(count()); // 2
-console.log(count()); // 3
+// console.log(count()); // 1
+// console.log(count()); // 2
+// console.log(count()); // 3
 
-const count2 = createCount();
+// const count2 = createCount();
 
-console.log(count2()); // 1
-console.log(count2()); // 2
+// console.log(count2()); // 1
+// console.log(count2()); // 2
+
+// function func1() {
+//   const h1El = document.querySelector("h1");
+//   const h2El = document.querySelector("h2");
+
+//   let h1IsRed = false;
+//   let h2IsRed = false;
+
+//   h1El.addEventListener("click", (event) => {
+//     h1IsRed = !h1IsRed;
+//     h1El.style.color = h1IsRed ? "red" : "black";
+//   });
+
+//   h2El.addEventListener("click", (event) => {
+//     h2IsRed = !h2IsRed;
+//     h2El.style.color = h2IsRed ? "red" : "black";
+//   });
+// }
+
+// // func1();
+
+// function useCloser() {
+//   const h1El = document.querySelector("h1");
+//   const h2El = document.querySelector("h2");
+
+//   const createToggleHandler = () => {
+//     let isRed = false;
+//     return (event) => {
+//       isRed = !isRed;
+//       event.target.style.color = isRed ? "red" : "black";
+//     };
+//   };
+//   h1El.addEventListener("click", createToggleHandler());
+//   h2El.addEventListener("click", createToggleHandler());
+// }
+
+// useCloser();
+
+// ✅`메모리 누수 (Memory Leak)
+
+// 더 이상 필요하지 않은 데이터가 해제되지 못하고 메모리를 계속 차지하는 현상
+
+// - 불필요한 전역 변수 사용
+// - 불필요한 노드 참조
+// - 해제하지 않은 타이머
+// - 잘못된 클로저 사용
+
+// 꼭 필요한 것 아니라면 window라는 전역객체의 속성으로 등록하는 것 피하기
+window.hello = "Hello world!";
+window.person = { name: "Heesoo", age: 35 };
 
 function func1() {
-  const h1El = document.querySelector("h1");
-  const h2El = document.querySelector("h2");
+  const btn = document.querySelector("button");
+  const parent = document.querySelector(".parent");
 
-  let h1IsRed = false;
-  let h2IsRed = false;
-
-  h1El.addEventListener("click", (event) => {
-    h1IsRed = !h1IsRed;
-    h1El.style.color = h1IsRed ? "red" : "black";
-  });
-
-  h2El.addEventListener("click", (event) => {
-    h2IsRed = !h2IsRed;
-    h2El.style.color = h2IsRed ? "red" : "black";
+  btn.addEventListener("click", () => {
+    console.log(parent); // 한 번 클릭해서 제거된 이후에도 계속 참조된 parent 값 나옴. 메모리 값에는 남아있기 때문에
+    parent.remove();
   });
 }
 
 // func1();
 
-function useCloser() {
-  const h1El = document.querySelector("h1");
-  const h2El = document.querySelector("h2");
-
-  const createToggleHandler = () => {
-    let isRed = false;
-    return (event) => {
-      isRed = !isRed;
-      event.target.style.color = isRed ? "red" : "black";
-    };
-  };
-  h1El.addEventListener("click", createToggleHandler());
-  h2El.addEventListener("click", createToggleHandler());
+function func2() {
+  const btn = document.querySelector("button");
+  btn.addEventListener("click", () => {
+    const parent = document.querySelector(".parent");
+    console.log(parent);
+    parent && parent.remove();
+  });
 }
 
-useCloser();
+func2();
+
+function timer() {
+  let a = 0;
+  setInterval(() => {
+    a += 1;
+  }, 100); // 계속해서 반복하고 있음
+
+  setTimeout(() => {
+    console.log(a);
+  }, 1000);
+}
+
+// timer();
+
+function timer2() {
+  let a = 0;
+  const intervalId = setInterval(() => {
+    a += 1;
+  }, 100);
+
+  setTimeout(() => {
+    console.log(a);
+    clearInterval(intervalId);
+  }, 1000);
+}
+
+timer2();
+
+function wrongCloser() {
+  const getFn = () => {
+    let a = 0;
+    return (name) => {
+      a += 1; // 이거 없더라도
+      console.log(a); // 여기에서 참조하고 있으니까 가비지 컬렉션이 메모리 비우지 못함
+      return `Hello ${name}~`;
+    };
+  };
+
+  const fn = getFn();
+  console.log(fn("Heropy"));
+  console.log(fn("Neo"));
+  console.log(fn("Lewis"));
+}
+
+wrongCloser();
