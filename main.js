@@ -69,94 +69,116 @@
 
 // reference();
 
-// ✅ 얕은 복사와 깊은 복사
+// // ✅ 얕은 복사와 깊은 복사
 
-// 참조형은 가변성으로 인해, 데이터를 복사할 때 주의가 필요
+// // 참조형은 가변성으로 인해, 데이터를 복사할 때 주의가 필요
 
-// 얕은 복사(Shallow Copy) - 참조형의 1차원 데이터만 복사
-// 깊은 복사(Deep Copy) - 참조형의 모든 차원 데이터를 복사
+// // 얕은 복사(Shallow Copy) - 참조형의 1차원 데이터만 복사
+// // 깊은 복사(Deep Copy) - 참조형의 모든 차원 데이터를 복사
 
-function primitive() {
-  let a = 1;
-  let b = a;
+// function primitive() {
+//   let a = 1;
+//   let b = a;
 
-  b = 2;
+//   b = 2;
 
-  console.log(b); // 2
-  console.log(a); // 1
+//   console.log(b); // 2
+//   console.log(a); // 1
 
-  b = 3;
+//   b = 3;
 
-  console.log(b); // 3
-  console.log(a); // 1
-}
+//   console.log(b); // 3
+//   console.log(a); // 1
+// }
 
-primitive();
+// primitive();
 
-function shallowCopy() {
-  const a = { x: 1 };
-  const b = Object.assign({}, a); // 속성만 복사해서 넣음
-  b.x = 2;
+// function shallowCopy() {
+//   const a = { x: 1 };
+//   const b = Object.assign({}, a); // 속성만 복사해서 넣음
+//   b.x = 2;
 
-  console.log(b); // {x: 2}
-  console.log(a); // {x: 1}
-}
+//   console.log(b); // {x: 2}
+//   console.log(a); // {x: 1}
+// }
 
-shallowCopy();
+// shallowCopy();
 
-function shallowCopy2() {
-  const a = { x: { y: 1 } };
-  const b = { ...a };
-  b.x.y = 2;
+// function shallowCopy2() {
+//   const a = { x: { y: 1 } };
+//   const b = { ...a };
+//   b.x.y = 2;
 
-  console.log(b); // {x: {y: 2}}
-  console.log(a); // {x: {y: 2}}
-}
+//   console.log(b); // {x: {y: 2}}
+//   console.log(a); // {x: {y: 2}}
+// }
 
-shallowCopy2();
+// shallowCopy2();
 
-import cloneDeep from "lodash/cloneDeep";
+// import cloneDeep from "lodash/cloneDeep";
 
-function deepCopy() {
-  const a = { x: { y: 1 } };
-  const b = cloneDeep(a);
-  b.x.y = 2;
+// function deepCopy() {
+//   const a = { x: { y: 1 } };
+//   const b = cloneDeep(a);
+//   b.x.y = 2;
 
-  console.log(b); // {x: {y: 2}}
-  console.log(a); // {x: {y: 1}}
-}
+//   console.log(b); // {x: {y: 2}}
+//   console.log(a); // {x: {y: 1}}
+// }
 
-deepCopy();
+// deepCopy();
 
-function copyArray() {
-  const a = [1, 2, 3];
-  const b = a;
-  b[0] = 4;
-  console.log(b); // [4, 2, 3]
-  console.log(a); // [4, 2, 3]
-}
+// function copyArray() {
+//   const a = [1, 2, 3];
+//   const b = a;
+//   b[0] = 4;
+//   console.log(b); // [4, 2, 3]
+//   console.log(a); // [4, 2, 3]
+// }
 
-copyArray();
+// copyArray();
 
-function shallowArrayCopy() {
-  const a = [1, 2, 3];
-  // const b = a.concat([]);
-  const b = [...a];
-  b[0] = 4;
-  console.log(b); // [4, 2, 3]
-  console.log(a); // [1, 2, 3]
-}
+// function shallowArrayCopy() {
+//   const a = [1, 2, 3];
+//   // const b = a.concat([]);
+//   const b = [...a];
+//   b[0] = 4;
+//   console.log(b); // [4, 2, 3]
+//   console.log(a); // [1, 2, 3]
+// }
 
-shallowArrayCopy();
+// shallowArrayCopy();
 
-function deepArrayCopy() {
-  const a = [[1, 2], [3]];
-  const b = cloneDeep(a);
+// function deepArrayCopy() {
+//   const a = [[1, 2], [3]];
+//   const b = cloneDeep(a);
 
-  b[0][0] = 5;
+//   b[0][0] = 5;
 
-  console.log(b); //  [[5, 2], [1]]
-  console.log(a); // [[1, 2], [3]]
-}
+//   console.log(b); // [[5, 2], [1]]
+//   console.log(a); // [[1, 2], [3]]
+// }
 
-deepArrayCopy();
+// deepArrayCopy();
+
+// ✅ 가비지 컬렉션(GC, Garbage Collection, 쓰레기 수집)
+
+// 자바스크립트의 메모리 관리 방법으로 자바스크립트 엔진이 자동으로
+// 데이터가 할당된 메모리에서 더 이상 사용되지 않는 데이터를 해제하는 것
+// 가비지 컬렉션은 개발자가 직접 강제 실행하거나 관리할 수 없음
+
+let a = { x: 1 };
+let b = a;
+
+b.x = 2;
+console.log(b);
+console.log(a);
+
+const user = {
+  name: "Ajwajwa",
+  age: 25,
+  emails: ["happy@gmail.com", "icandoit@abc.com"],
+};
+
+delete user.emails;
+console.log(user);
