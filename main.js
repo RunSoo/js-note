@@ -36,21 +36,37 @@
 
 // removeEvent();
 
-// ✅`이벤트 객체
+// // ✅`이벤트 객체
 
-// 이벤트 객ㅊ는 대상에서 발생한 이벤트 정보를 담고 있음
+// // 이벤트 객체는 대상에서 발생한 이벤트 정보를 담고 있음
 
+// const parentEl = document.querySelector(".parent");
+
+// parentEl.addEventListener("click", (event) => {
+//   console.log(event.target, event.currentTarget);
+// });
+
+// parentEl.addEventListener("wheel", (e) => {
+//   console.log(e);
+// });
+
+// const inputEl = document.querySelector("input");
+// inputEl.addEventListener("keydown", (event) => {
+//   console.log(event.key);
+// });
+
+// ✅ 기본 동작 방지
+
+// 마우스 휠의 스크롤 동작 방지
 const parentEl = document.querySelector(".parent");
-
-parentEl.addEventListener("click", (event) => {
-  console.log(event.target, event.currentTarget);
+parentEl.addEventListener("wheel", (event) => {
+  event.preventDefault();
+  console.log("Wheel");
 });
 
-parentEl.addEventListener("wheel", (e) => {
-  console.log(e);
-});
-
-const inputEl = document.querySelector("input");
-inputEl.addEventListener("keydown", (event) => {
-  console.log(event.key);
+// <a> 태그에서 페이지 이동 방지
+const anchorEl = document.querySelector("a");
+anchorEl.addEventListener("click", (event) => {
+  event.preventDefault();
+  console.log("anchor");
 });
