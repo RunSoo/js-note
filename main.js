@@ -161,24 +161,84 @@
 
 // deepArrayCopy();
 
-// ✅ 가비지 컬렉션(GC, Garbage Collection, 쓰레기 수집)
+// // ✅ 가비지 컬렉션(GC, Garbage Collection, 쓰레기 수집)
 
-// 자바스크립트의 메모리 관리 방법으로 자바스크립트 엔진이 자동으로
-// 데이터가 할당된 메모리에서 더 이상 사용되지 않는 데이터를 해제하는 것
-// 가비지 컬렉션은 개발자가 직접 강제 실행하거나 관리할 수 없음
+// // 자바스크립트의 메모리 관리 방법으로 자바스크립트 엔진이 자동으로
+// // 데이터가 할당된 메모리에서 더 이상 사용되지 않는 데이터를 해제하는 것
+// // 가비지 컬렉션은 개발자가 직접 강제 실행하거나 관리할 수 없음
 
-let a = { x: 1 };
-let b = a;
+// let a = { x: 1 };
+// let b = a;
 
-b.x = 2;
-console.log(b);
-console.log(a);
+// b.x = 2;
+// console.log(b);
+// console.log(a);
 
-const user = {
-  name: "Ajwajwa",
-  age: 25,
-  emails: ["happy@gmail.com", "icandoit@abc.com"],
-};
+// const user = {
+//   name: "Ajwajwa",
+//   age: 25,
+//   emails: ["happy@gmail.com", "icandoit@abc.com"],
+// };
 
-delete user.emails;
-console.log(user);
+// delete user.emails;
+// console.log(user);
+
+// ✅ 클로저 (Closure)
+
+// 함수가 선언될 때의 유효범위(렉시컬 범위)를 기억하고 있다
+// 함수가 외부에서 호출될 때 그 유효범위의 특정 변수를 참조할 수 있는 개념
+
+function createCount() {
+  let a = 0;
+  return function () {
+    return (a += 1);
+  };
+}
+
+const count = createCount();
+
+console.log(count()); // 1
+console.log(count()); // 2
+console.log(count()); // 3
+
+const count2 = createCount();
+
+console.log(count2()); // 1
+console.log(count2()); // 2
+
+function func1() {
+  const h1El = document.querySelector("h1");
+  const h2El = document.querySelector("h2");
+
+  let h1IsRed = false;
+  let h2IsRed = false;
+
+  h1El.addEventListener("click", (event) => {
+    h1IsRed = !h1IsRed;
+    h1El.style.color = h1IsRed ? "red" : "black";
+  });
+
+  h2El.addEventListener("click", (event) => {
+    h2IsRed = !h2IsRed;
+    h2El.style.color = h2IsRed ? "red" : "black";
+  });
+}
+
+// func1();
+
+function useCloser() {
+  const h1El = document.querySelector("h1");
+  const h2El = document.querySelector("h2");
+
+  const createToggleHandler = () => {
+    let isRed = false;
+    return (event) => {
+      isRed = !isRed;
+      event.target.style.color = isRed ? "red" : "black";
+    };
+  };
+  h1El.addEventListener("click", createToggleHandler());
+  h2El.addEventListener("click", createToggleHandler());
+}
+
+useCloser();
