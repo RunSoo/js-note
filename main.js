@@ -55,18 +55,99 @@
 //   console.log(event.key);
 // });
 
-// ✅ 기본 동작 방지
+// // ✅ 기본 동작 방지
 
-// 마우스 휠의 스크롤 동작 방지
-const parentEl = document.querySelector(".parent");
-parentEl.addEventListener("wheel", (event) => {
-  event.preventDefault();
-  console.log("Wheel");
-});
+// // 마우스 휠의 스크롤 동작 방지
+// const parentEl = document.querySelector(".parent");
+// parentEl.addEventListener("wheel", (event) => {
+//   event.preventDefault();
+//   console.log("Wheel");
+// });
 
-// <a> 태그에서 페이지 이동 방지
-const anchorEl = document.querySelector("a");
-anchorEl.addEventListener("click", (event) => {
-  event.preventDefault();
-  console.log("anchor");
-});
+// // <a> 태그에서 페이지 이동 방지
+// const anchorEl = document.querySelector("a");
+// anchorEl.addEventListener("click", (event) => {
+//   event.preventDefault();
+//   console.log("anchor");
+// });
+
+// ✅ 버블링과 캡처링
+
+// 이벤트 전파(버블) 정지
+function stopBubble() {
+  const parentEl = document.querySelector(".parent");
+  const childEl = document.querySelector(".child");
+  const anchorEl = document.querySelector("a");
+
+  window.addEventListener("click", (event) => {
+    console.log("window");
+  });
+
+  document.body.addEventListener("click", (event) => {
+    console.log("body");
+  });
+
+  parentEl.addEventListener("click", (event) => {
+    event.stopPropagation();
+    console.log("parent");
+  });
+
+  childEl.addEventListener("click", (event) => {
+    console.log("child");
+  });
+
+  anchorEl.addEventListener("click", (event) => {
+    console.log("anchor");
+  });
+}
+
+// stopBubble();
+
+function capture() {
+  const parentEl = document.querySelector(".parent");
+  const childEl = document.querySelector(".child");
+  const anchorEl = document.querySelector("a");
+
+  window.addEventListener("click", (event) => {
+    console.log("window");
+  });
+
+  document.body.addEventListener(
+    "click",
+    (event) => {
+      console.log("body");
+      event.stopPropagation(); // body만 출력
+    },
+    { capture: true } // 상위 요소가 먼저 실행되도록
+  );
+
+  parentEl.addEventListener(
+    "click",
+    (event) => {
+      console.log("parent");
+    },
+    { capture: true }
+  );
+
+  childEl.addEventListener("click", (event) => {
+    console.log("child");
+  });
+
+  anchorEl.addEventListener("click", (event) => {
+    console.log("anchor");
+  });
+}
+
+// capture();
+
+function func() {
+  const parentEl = document.querySelector(".parent");
+  const handler = () => {
+    console.log("Parent");
+  };
+
+  parentEl.addEventListener("click", handler, { capture: true });
+  parentEl.removeEventListener("click", handler); // 이러면 제거가 안됨. remove 할 때도 { capture: true }로 같은 옵션 제공해야 함
+}
+
+func();
